@@ -6,6 +6,14 @@
 <title>وێبسایتی بەرنامەکانم - کوردی و ناوازە</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>وێبسایتی بەرنامەکانم - کوردی و ناوازە</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <style>
   /* Reset and basics */
   *, *::before, *::after {
@@ -22,6 +30,415 @@
   direction: rtl;
   display: flex;
   flex-direction: column;
+}
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 100%;
+    border-radius: 16px;
+    display: block;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+  }
+
+  /* Header */
+  header {
+    background: rgba(15, 50, 70, 0.85);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 2px solid #55b4d4;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #ffffff;
+    letter-spacing: 1.2px;
+    cursor: default;
+    user-select: none;
+  }
+  nav.desktop-nav {
+    display: flex;
+    gap: 28px;
+  }
+  nav.desktop-nav a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav.desktop-nav a:hover,
+  nav.desktop-nav a:focus {
+    color: #a3e3f7;
+    outline: none;
+  }
+  nav.desktop-nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: #a3e3f7;
+    transition: width 0.3s ease;
+  }
+  nav.desktop-nav a:hover::after,
+  nav.desktop-nav a:focus::after {
+    width: 100%;
+    right: 0;
+    left: auto;
+  }
+
+  button.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #f0f4f8;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 32px;
+    user-select: none;
+    line-height: 1;
+  }
+  nav.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(15, 50, 70, 0.95);
+    backdrop-filter: saturate(200%) blur(10px);
+    padding: 16px 24px;
+    position: absolute;
+    top: 64px;
+    right: 0;
+    left: 0;
+    z-index: 1001;
+    border-bottom: 1px solid #338ea2;
+  }
+  nav.mobile-nav a {
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #338ea2;
+    color: #e0f7ff;
+    transition: color 0.3s ease;
+  }
+  nav.mobile-nav a:last-child {
+    border-bottom: none;
+  }
+  nav.mobile-nav a:hover,
+  nav.mobile-nav a:focus {
+    color: #a3e3f7;
+    outline: none;
+  }
+
+  /* Hero */
+  section.hero {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: 96px 0 64px;
+    min-height: 480px;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero-title {
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    text-shadow: 0 0 8px rgba(163, 227, 247, 0.8);
+  }
+  .hero-desc {
+    font-size: 1.2rem;
+    margin-bottom: 48px;
+    color: #d0f4ffcc;
+  }
+  .btn-primary {
+    background: linear-gradient(45deg, #00d2ff, #377dff);
+    color: #fff;
+    padding: 18px 56px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(55, 125, 255, 0.5);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    box-shadow: 0 12px 24px rgba(55, 125, 255, 0.8);
+    transform: translateY(-4px);
+    outline: none;
+  }
+
+  /* Apps section */
+  section.apps {
+    padding: 80px 0 96px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 56px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  .app-card {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 32px;
+    padding: 32px 28px;
+    box-shadow: 0 0 12px #1f8ed3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .app-card:hover,
+  .app-card:focus-within {
+    box-shadow: 0 0 32px #4799e5;
+    transform: translateY(-12px);
+    outline: none;
+  }
+  .app-image {
+    width: 180px;
+    height: 360px;
+    margin-bottom: 32px;
+    border-radius: 32px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+    background: linear-gradient(135deg, #4ca1af, #2c3e50);
+  }
+  .app-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+  .app-desc {
+    font-size: 1rem;
+    color: #cbe9ffdd;
+    margin-bottom: 32px;
+    max-width: 280px;
+  }
+  .download-btn {
+    background: linear-gradient(135deg, #4ca1af 0%, #337c8c 100%);
+    color: #eef9ff;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 14px 36px;
+    border-radius: 32px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(51, 124, 140, 0.65);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.4s ease, transform 0.3s ease;
+  }
+  .download-btn:hover,
+  .download-btn:focus {
+    background: linear-gradient(135deg, #337c8c 0%, #225660 100%);
+    transform: translateY(-3px);
+    outline: none;
+  }
+  .download-btn .material-icons {
+    font-size: 20px;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(15, 50, 70, 0.85);
+    padding: 60px 24px 40px;
+    border-top: 2px solid #55b4d4;
+    text-align: center;
+    color: #b8d5e3;
+    font-size: 0.9rem;
+  }
+  footer p {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .app-image {
+      width: 140px;
+      height: 280px;
+      margin-bottom: 24px;
+    }
+    .app-card {
+      padding: 24px 16px;
+    }
+  }
+  @media (max-width: 640px) {
+    nav.desktop-nav {
+      display: none;
+    }
+    button.mobile-menu-toggle {
+      display: block;
+    }
+    nav.mobile-nav.show {
+      display: flex;
+    }
+    section.hero {
+      padding: 64px 16px 56px;
+      text-align: center;
+    }
+    .hero-title {
+      font-size: 2rem;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+  }
+
+  /* Accessibility outlines */
+  a:focus-visible, button:focus-visible,
+  .app-card:focus-visible {
+    outline: 3px solid #a3e3f7;
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<header role="banner" aria-label="بەشە سەرەکییەکان">
+  <div class="container header-inner">
+    <div class="logo" aria-label="نیشانی ماڵەوە">بەرنامەکانم</div>
+    <nav class="desktop-nav" role="navigation" aria-label="ناوبەندی سەرەکی">
+      <a href="#hero" tabindex="0">سەرەتا</a>
+      <a href="#apps" tabindex="0">بەرنامەکان</a>
+      <a href="#contact" tabindex="0">پەیوەندیمان پێوە بکە</a>
+      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+    </nav>
+    <button aria-label="کردنەوەی مێنوی موبایل" aria-expanded="false" aria-controls="mobile-menu" class="mobile-menu-toggle" id="mobile-menu-button" aria-haspopup="true">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+  <nav id="mobile-menu" class="mobile-nav" role="navigation" aria-label="مێنی موبایل" hidden>
+    <a href="#hero" tabindex="-1">سەرەتا</a>
+    <a href="#apps" tabindex="-1">بەرنامەکان</a>
+    <a href="#contact" tabindex="-1">پەیوەندیمان پێوە بکە</a>
+  </nav>
+</header>
+
+<section id="hero" class="hero" role="region" aria-label="پێشکەشکردنی بەرنامەکان">
+  <div class="container hero-content">
+    <h1 class="hero-title">کۆتایی نادات بە شاشمی بەرنامەکان</h1>
+    <p class="hero-desc">لەگەڵ ئەپەکانی من بەرنامەکانت بەخێرایی هەڵبگرە و بە شێوەیەکی کوردی گەیشتە پێش و دایکەوتنی ئەپەکانت بە ئاسانیدا ببینە و داگیر بکە.</p>
+    <a href="#apps" class="btn-primary" aria-label="پیشاندانی بەرنامەکان">بینینی بەرنامەکان <span class="material-icons" aria-hidden="true">arrow_back</span></a>
+  </div>
+</section>
+
+<section id="apps" class="apps" aria-label="بەشەکانی بەرنامە">
+  <article class="app-card" tabindex="0" aria-labelledby="android-title">
+    <div class="app-image" role="img" aria-label="موبایل نوێ لەسەر پلاتفۆڕمی ئەندرۆید"></div>
+    <h2 class="app-title" id="android-title">بەرنامەی ئەندرۆید</h2>
+    <p class="app-desc">بەرنامەی خۆشحاڵبوونت لە پلاتفۆڕمی ئەندرۆید بە شێوەی تایبەتی نووسراوە بۆ بەکاری هێنەرانی کوردی.</p>
+    <button class="download-btn" aria-label="داگرتنی بەرنامەی ئەندرۆید">
+      داگرتن
+      <span class="material-icons" aria-hidden="true">android</span>
+    </button>
+  </article>
+
+  <article class="app-card" tabindex="0" aria-labelledby="ios-title">
+    <div class="app-image" role="img" aria-label="ئایفۆن نوێ لەسەر پلاتفۆڕمی iOS"></div>
+    <h2 class="app-title" id="ios-title">بەرنامەی iOS</h2>
+    <p class="app-desc">بەرنامەی خۆشحاڵبوونت بۆ iOSە بەتایبەتی بۆ خەڵکی کوردی و بە دیزاینێکی نوێ و ناوازە.</p>
+    <button class="download-btn" aria-label="داگرتنی بەرنامەی iOS">
+      داگرتن
+      <span class="material-icons" aria-hidden="true">smartphone</span>
+    </button>
+  </article>
+</section>
+
+<footer id="contact" role="contentinfo" aria-label="بەشی پەیوەندی">
+  <p>© ٢٠٢٤ هەموو مافەکان پارێزراون - بەرنامەکانم</p>
+  <p>ئیمەیڵ: <a href="mailto:support@example.com">support@example.com</a> | تەلەفون: +964 750 123 4567</p>
+</footer>
+
+<script>
+  (function () {
+    const menuBtn = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    function toggleMenu() {
+      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+      menuBtn.setAttribute("aria-expanded", String(!expanded));
+      if (expanded) {
+        mobileMenu.setAttribute("hidden", "");
+        Array.from(mobileMenu.querySelectorAll("a")).forEach((link) =>
+          link.setAttribute("tabindex", "-1")
+        );
+      } else {
+        mobileMenu.removeAttribute("hidden");
+        Array.from(mobileMenu.querySelectorAll("a")).forEach((link) =>
+          link.setAttribute("tabindex", "0")
+        );
+      }
+    }
+
+    menuBtn.addEventListener("click", toggleMenu);
+
+    document.addEventListener("click", (event) => {
+      if (
+        !mobileMenu.contains(event.target) &&
+        event.target !== menuBtn
+      ) {
+        menuBtn.setAttribute("aria-expanded", "false");
+        mobileMenu.setAttribute("hidden", "");
+        Array.from(mobileMenu.querySelectorAll("a")).forEach((link) =>
+          link.setAttribute("tabindex", "-1")
+        );
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 640) {
+        menuBtn.setAttribute("aria-expanded", "false");
+        mobileMenu.setAttribute("hidden", "");
+        Array.from(mobileMenu.querySelectorAll("a")).forEach((link) =>
+          link.setAttribute("tabindex", "-1")
+        );
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
+
+<style>
+  /* Reset and basics */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+  font-family: 'Tajawal', 'Cairo', sans-serif;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+h1, h2, .logo, nav a, .btn-primary, .app-title, .download-btn {
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
   a {
     text-decoration: none;
