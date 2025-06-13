@@ -1,0 +1,13 @@
+/* ---------- ١) تۆ کردوی ٢۴px padding ـێک کە هەردو لای container ـکەت یەکسان بێت ---------- */
+.container {
+  /* padding: 0 24px; */    /* ئەو لینێ comment بکەوە ئەگەر هێشتا نییە */
+  padding-inline: 24px;      /* padding لە هەردو لاپەڕە بەشێوەی منطقی */
+  margin-inline: auto;       /* دابنێ container ـکەت لە نێو ڕووکەش */
+}
+
+/* ---------- ٢) (Choice) ئەگەر لە mobile وەخت padding زیاد نەخوای ---------- */
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 16px;    /* بۆ موبایل کمی padding بکەمەوە */
+  }
+}
