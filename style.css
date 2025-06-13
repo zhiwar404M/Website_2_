@@ -1,13 +1,34 @@
-/* ---------- ١) تۆ کردوی ٢۴px padding ـێک کە هەردو لای container ـکەت یەکسان بێت ---------- */
-.container {
-  /* padding: 0 24px; */    /* ئەو لینێ comment بکەوە ئەگەر هێشتا نییە */
-  padding-inline: 24px;      /* padding لە هەردو لاپەڕە بەشێوەی منطقی */
-  margin-inline: auto;       /* دابنێ container ـکەت لە نێو ڕووکەش */
+/* 🔹 هێدەر پۆزیشنی relative بۆ دوگمە */
+header {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3); /* هەر ئەوەی تۆ دەتەوێ */
+  padding: 20px 0;
+  text-align: center;
 }
 
-/* ---------- ٢) (Choice) ئەگەر لە mobile وەخت padding زیاد نەخوای ---------- */
-@media (max-width: 640px) {
-  .container {
-    padding-inline: 16px;    /* بۆ موبایل کمی padding بکەمەوە */
-  }
+/* 🔹 دوگمەی مێنی بۆ لای چەپ */
+button.mobile-menu-toggle {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 16px;  /* بۆ چەپ یان ڕاست بەراورد بە زمان */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+/* 🔹 فۆتەر بگرێتەوە لە هەردو لا */
+footer {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+footer .container {
+  max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
