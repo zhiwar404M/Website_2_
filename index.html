@@ -1,108 +1,149 @@
 <!doctype html>
-<html lang="ku">
+<html lang="ckb" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CineWave • فلیم و زنجیرە و ئەنیمەیشن</title>
-    <meta name="description" content="وێبسایتێکی تایبەتی بۆ فلیم، زنجیرە و ئەنیمەیشن بە دیزاینێکی پێشکەوتوو." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>ZHIWAR Cinema — پلاتفۆرمی فلیم/زنجیرە/ئەنیما</title>
+    <meta name="description" content="دیزاینی ڕەنگاڵەیەکی ناوازە و پێشکەوتوو وەک Netflix، بە 3D و ئەنیمەیشنەکان، بۆ هەلبژاردن و بینینی فلیم و زنجیرە و ئەنیما." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;800&family=Rubik:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="bg-net"></div>
-    <header class="site-header">
-      <div class="header-top">
-        <div id="ad-top" class="ad-slot ad-top" aria-label="Adsterra Top Banner"></div>
+    <canvas id="bg"></canvas>
+
+    <header class="nav">
+      <div class="brand">
+        <span class="brand-mark">Z</span>
+        <span class="brand-type">ZHIWAR Cinema</span>
       </div>
-      <div class="header-main">
-        <a href="#/" class="brand">
-          <span class="brand-mark">◈</span>
-          <span class="brand-name">CineWave</span>
-        </a>
-        <nav class="nav">
-          <a href="#/" class="nav-link">سەرەکی</a>
-          <a href="#/movies" class="nav-link">فلیم</a>
-          <a href="#/series" class="nav-link">زنجیرە</a>
-          <a href="#/animation" class="nav-link">ئەنیمەیشن</a>
-          <a href="#/watchlist" class="nav-link">لیستی سەیرکردن</a>
-        </nav>
-        <div class="search-wrap">
-          <input id="searchInput" type="search" placeholder="گەڕان..." aria-label="Search" />
-          <button id="searchBtn" class="btn btn-primary">گەڕان</button>
-        </div>
+      <nav class="nav-links">
+        <a href="#trending">سەرەتایی</a>
+        <a href="#movies">فلیم</a>
+        <a href="#series">زنجیرە</a>
+        <a href="#animation">ئەنیما</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn ghost">چوونەژوور</button>
+        <button class="btn solid">تۆماربوون</button>
       </div>
     </header>
 
-    <aside class="sidebar">
-      <div id="ad-sidebar" class="ad-slot ad-sidebar" aria-label="Adsterra Sidebar"></div>
-    </aside>
-
-    <main id="app" class="app">
-      <section class="hero" id="hero">
-        <div class="hero-bg"></div>
+    <main>
+      <section class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">سەیرکردنی فلیمی خۆشەویستەت بە شێوەیەکی نوێ</h1>
-          <p class="hero-sub">دیزاینی گڵاس/نیۆن، هەڵسەنگاندن و گەڕانی بێخەڵات، لەگەڵ جیاوازترین ئەنیوەشن و زنجیرەکان</p>
+          <h1 class="headline" data-animate="letters">هەست بە سینەما بکە — ناوازە و جیاواز</h1>
+          <p class="kicker" data-animate="words">ڕووکاری تاریک، ڕەنگی سوور و شەعشەی نیۆن، بە 3D و ئەنیمەیشنەکانی دڵڕفاندن — لە هیچ شوێنەکەی دیکە ناچیتە چاوت.</p>
           <div class="hero-cta">
-            <a href="#/trending" class="btn btn-glow">دەتەوێت دەستپێبکەیت؟</a>
+            <button class="btn xl solid">دەست پێ بکە</button>
+            <button class="btn xl ghost">بینینی تریلەر</button>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-chip">4K HDR</div>
+            <div class="meta-chip">Dolby Vision</div>
+            <div class="meta-chip">Spatial Audio</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="stack3d" id="stack3d">
+            <div class="poster-card" data-video="https://cdn.coverr.co/videos/coverr-popcorn-4136/1080p.mp4">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1600&auto=format&fit=crop" alt="Poster 1"/>
+                <video muted playsinline loop></video>
+              </div>
+            </div>
+            <div class="poster-card" data-video="https://cdn.coverr.co/videos/coverr-movie-projector-1116/1080p.mp4">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1600&auto=format&fit=crop" alt="Poster 2"/>
+                <video muted playsinline loop></video>
+              </div>
+            </div>
+            <div class="poster-card" data-video="https://cdn.coverr.co/videos/coverr-hacker-and-code-6536/1080p.mp4">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop" alt="Poster 3"/>
+                <video muted playsinline loop></video>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="controls">
-        <div class="filters">
-          <select id="filterType">
-            <option value="all">هەموو</option>
-            <option value="movie">فلیم</option>
-            <option value="series">زنجیرە</option>
-            <option value="animation">ئەنیمەیشن</option>
-          </select>
-          <select id="filterYear">
-            <option value="all">ساڵ</option>
-          </select>
-          <select id="filterRating">
-            <option value="all">هەڵسەنگاندن</option>
-            <option value="9">9+</option>
-            <option value="8">8+</option>
-            <option value="7">7+</option>
-            <option value="6">6+</option>
-          </select>
-          <button id="clearFilters" class="btn btn-ghost">سڕینەوەی فلتەرەکان</button>
+      <section class="row" id="trending">
+        <div class="row-head">
+          <h2 class="row-title" data-animate="letters">خەریکی سەرنج ـ Trending</h2>
+          <a class="row-action" href="#">هەمووی ببینە</a>
         </div>
-        <div class="view-toggles">
-          <button id="toggleGrid" class="btn is-active" aria-pressed="true">گرید</button>
-          <button id="toggleList" class="btn" aria-pressed="false">لیست</button>
-        </div>
-      </section>
-
-      <section id="catalog" class="catalog">
-        <div id="catalogGrid" class="grid"></div>
-        <div id="loading" class="loading hide">
-          <div class="spinner"></div>
-          <span>بارکردن…</span>
+        <div class="rail">
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1497032205916-ac775f0649ae?q=80&w=1600&auto=format&fit=crop" alt="Trending 1"/>
+            <div class="tile-info"><h3>پڕەسڕ</h3><p>ئاڵوگۆڕی خەیاڵی</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=1600&auto=format&fit=crop" alt="Trending 2"/>
+            <div class="tile-info"><h3>شەوە تاریکەکان</h3><p>دەقە نوێکان</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1526312426976-593c0a1a52d3?q=80&w=1600&auto=format&fit=crop" alt="Trending 3"/>
+            <div class="tile-info"><h3>ناوازە</h3><p>زانیاریی دراوە</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1600&auto=format&fit=crop" alt="Trending 4"/>
+            <div class="tile-info"><h3>ڕەوت</h3><p>هەستکردن</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1600&auto=format&fit=crop" alt="Trending 5"/>
+            <div class="tile-info"><h3>کلاسیک</h3><p>زەردەخانی</p></div>
+          </article>
         </div>
       </section>
 
-      <section id="detail" class="detail hide" aria-live="polite"></section>
-      <section id="watchlist" class="watchlist hide"></section>
-
-      <div id="ad-footer" class="ad-slot ad-footer" aria-label="Adsterra Footer"></div>
+      <section class="row" id="animation">
+        <div class="row-head">
+          <h2 class="row-title" data-animate="letters">ئەنیما ـ 3D</h2>
+          <a class="row-action" href="#">هەمووی ببینە</a>
+        </div>
+        <div class="rail">
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1618172193763-c511deb635ca?q=80&w=1600&auto=format&fit=crop" alt="Anim 1"/>
+            <div class="tile-info"><h3>نێبولا</h3><p>ڕەنگاوڕەنگ</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=1600&auto=format&fit=crop" alt="Anim 2"/>
+            <div class="tile-info"><h3>سايبەر</h3><p>نیۆن و تاریکی</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop" alt="Anim 3"/>
+            <div class="tile-info"><h3>گۆڕان</h3><p>ڕەوشی ژیان</p></div>
+          </article>
+          <article class="tile tilt">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1600&auto=format&fit=crop" alt="Anim 4"/>
+            <div class="tile-info"><h3>کوێستان</h3><p>بەهێزی گرافیکی</p></div>
+          </article>
+        </div>
+      </section>
     </main>
 
-    <div id="trailerModal" class="modal hide" role="dialog" aria-modal="true" aria-label="Trailer">
-      <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-content">
-        <button class="modal-close" data-close-modal aria-label="Close">✕</button>
-        <div class="modal-body">
-          <iframe id="trailerFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+    <footer class="footer">
+      <div class="credit">
+        <span class="sig">ZHIWAR</span>
+        <span class="byline">دروستکەری ئەم پلاتفۆرمە</span>
       </div>
+      <div class="foot-links">
+        <a href="#">تۆماربوون</a>
+        <a href="#">پەیوەندی</a>
+        <a href="#">مەرج و ئاسایشی تایبەتی</a>
+      </div>
+    </footer>
+
+    <div class="creator-badge" title="Made by ZHIWAR">
+      <span>ZHIWAR</span>
     </div>
 
-    <script src="/ads/adsterra-config.js" defer></script>
-    <script src="/ads/adsterra.js" defer></script>
-    <script src="/scripts/app.js" defer></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
