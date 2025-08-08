@@ -44,6 +44,12 @@ const mouse = { x: 0, y: 0 };
 window.addEventListener('pointermove', (e) => {
   mouse.x = (e.clientX / innerWidth) * 2 - 1;
   mouse.y = (e.clientY / innerHeight) * 2 - 1;
+  // spotlight cursor track
+  const spot = document.getElementById('spotlight');
+  if (spot) {
+    spot.style.setProperty('--sx', e.clientX + 'px');
+    spot.style.setProperty('--sy', e.clientY + 'px');
+  }
 });
 
 function animate() {
@@ -130,6 +136,23 @@ function resetTilt(e) { e.currentTarget.style.transform = 'rotateX(0) rotateY(0)
 tiles.forEach((tile) => {
   tile.addEventListener('pointermove', handleTilt);
   tile.addEventListener('pointerleave', resetTilt);
+  // add actions
+  if (!tile.querySelector('.tile-actions')) {
+    const actions = document.createElement('div');
+    actions.className = 'tile-actions';
+    const addBtn = document.createElement('button');
+    addBtn.className = 'icon-btn';
+    addBtn.title = 'زیادکردن بۆ لیست';
+    addBtn.textContent = '+';
+    addBtn.addEventListener('click', () => addToWatchlistFromTile(tile));
+    const playBtn = document.createElement('button');
+    playBtn.className = 'icon-btn';
+    playBtn.title = 'تریلەر';
+    playBtn.textContent = '▶';
+    playBtn.addEventListener('click', () => openTrailer(tile.querySelector('img')?.src));
+    actions.append(addBtn, playBtn);
+    tile.appendChild(actions);
+  }
 });
 
 /* Poster stack hover video */
@@ -150,12 +173,15 @@ if (stack) {
         await video.play();
         playing = true;
       } catch (_) {}
+      // ambient accent from poster image average
+      const img = card.querySelector('img');
+      if (img) setAccentFromImage(img);
     });
     card.addEventListener('pointerleave', () => {
       if (playing) { video.pause(); video.currentTime = 0; playing = false; }
+      resetAccent();
     });
-    // gentle float animation per card
-    const baseZ = [120, 40, -80][idx % 3] || 0;
+    // gentle float
     gsap.to(card, { y: -10, duration: 2.4 + idx * 0.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: idx * 0.2 });
   });
   // subtle parallax on move
@@ -194,6 +220,123 @@ document.querySelectorAll('.row').forEach((row) => observer.observe(row));
 /* Accessibility: reduce motion */
 const mediaQuery = matchMedia('(prefers-reduced-motion: reduce)');
 if (mediaQuery.matches) {
-  // Freeze animations
   gsap.globalTimeline.timeScale(0);
+  document.documentElement.classList.add('reduced-motion');
 }
+
+/* Manual reduce effects toggle */
+const effectsToggle = document.getElementById('effectsToggle');
+if (effectsToggle) {
+  const key = 'reduced-effects';
+  const apply = (on) => {
+    document.documentElement.classList.toggle('reduced-motion', on);
+    gsap.globalTimeline.timeScale(on ? 0 : 1);
+    effectsToggle.classList.toggle('solid', on);
+    effectsToggle.textContent = on ? 'چالاککردنی ئەنیمەیشن' : 'کەمکردنەوەی ئەنیمەیشن';
+    localStorage.setItem(key, on ? '1' : '0');
+  };
+  apply(localStorage.getItem(key) === '1');
+  effectsToggle.addEventListener('click', () => apply(!document.documentElement.classList.contains('reduced-motion')));
+}
+
+/* Watchlist with persistence */
+const watchKey = 'watchlist-items';
+const chip = document.getElementById('watchlistChip');
+function getWatchlist() {
+  try { return JSON.parse(localStorage.getItem(watchKey) || '[]'); } catch { return []; }
+}
+function setWatchlist(arr) {
+  localStorage.setItem(watchKey, JSON.stringify(arr));
+  updateWatchlistCount();
+}
+function updateWatchlistCount() {
+  const countEl = chip?.querySelector('.count');
+  if (countEl) countEl.textContent = String(getWatchlist().length);
+}
+function addToWatchlistFromTile(tile) {
+  const title = tile.querySelector('h3')?.textContent?.trim() || 'ناونیشانێک';
+  const img = tile.querySelector('img')?.src;
+  const list = getWatchlist();
+  if (!list.find((x) => x.title === title && x.img === img)) {
+    list.push({ title, img, at: Date.now() });
+    setWatchlist(list);
+  }
+}
+updateWatchlistCount();
+if (chip) chip.addEventListener('click', () => {
+  const list = getWatchlist();
+  alert('لیستی سەیرکردن (' + list.length + '):\n' + list.map((x) => '• ' + x.title).join('\n'));
+});
+
+/* Trailer modal logic */
+const trailerBtn = document.getElementById('ctaTrailer');
+const trailerModal = document.getElementById('trailerModal');
+const trailerVideo = document.getElementById('trailerVideo');
+const trailerClose = trailerModal?.querySelector('.modal-close');
+function openTrailer(posterSrc) {
+  if (!trailerModal) return;
+  const sample = 'https://cdn.coverr.co/videos/coverr-movie-projector-1116/1080p.mp4';
+  if (trailerVideo && !trailerVideo.querySelector('source')) {
+    const s = document.createElement('source');
+    s.src = sample; s.type = 'video/mp4';
+    trailerVideo.appendChild(s);
+  }
+  trailerModal.classList.add('active');
+  trailerModal.setAttribute('open', '');
+  trailerModal.setAttribute('aria-hidden', 'false');
+  trailerVideo?.play().catch(() => {});
+}
+function closeTrailer() {
+  if (!trailerModal) return;
+  trailerModal.classList.remove('active');
+  trailerModal.removeAttribute('open');
+  trailerModal.setAttribute('aria-hidden', 'true');
+  if (trailerVideo) { trailerVideo.pause(); trailerVideo.currentTime = 0; }
+}
+if (trailerBtn) trailerBtn.addEventListener('click', () => openTrailer());
+trailerClose?.addEventListener('click', closeTrailer);
+trailerModal?.querySelector('.modal-backdrop')?.addEventListener('click', closeTrailer);
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTrailer(); });
+
+/* Ambient accent from image average color */
+const spot = document.getElementById('spotlight');
+function setAccentFromImage(img) {
+  try {
+    const c = document.createElement('canvas');
+    const ctx = c.getContext('2d');
+    const w = c.width = 64, h = c.height = 64;
+    ctx.drawImage(img, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      const rr = data[i], gg = data[i+1], bb = data[i+2];
+      const bright = rr*0.299 + gg*0.587 + bb*0.114;
+      if (bright < 240) { r += rr; g += gg; b += bb; n++; }
+    }
+    if (n > 0) { r/=n; g/=n; b/=n; }
+    const col = `rgba(${r|0}, ${g|0}, ${b|0}, 0.25)`;
+    spot?.style.setProperty('--accent', col);
+  } catch { /* ignore CORS */ }
+}
+function resetAccent() { spot?.style.setProperty('--accent', 'rgba(229,9,20,0.18)'); }
+
+/* Keyboard navigation for tiles */
+let focusedIndex = 0;
+const focusableTiles = Array.from(document.querySelectorAll('.tile'));
+function focusTile(i) {
+  if (focusableTiles.length === 0) return;
+  focusedIndex = (i + focusableTiles.length) % focusableTiles.length;
+  focusableTiles[focusedIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  focusableTiles[focusedIndex].classList.add('focus-ring');
+  setTimeout(() => focusableTiles[focusedIndex].classList.remove('focus-ring'), 600);
+}
+window.addEventListener('keydown', (e) => {
+  if (['ArrowLeft','ArrowRight'].includes(e.key)) {
+    e.preventDefault();
+    focusTile(focusedIndex + (e.key === 'ArrowLeft' ? -1 : 1));
+  }
+});
+
+/* CTA scroll */
+const ctaStart = document.getElementById('ctaStart');
+ctaStart?.addEventListener('click', () => document.getElementById('trending')?.scrollIntoView({ behavior: 'smooth' }));
