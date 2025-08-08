@@ -1,872 +1,112 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان</title>
-    <script type='text/javascript' src='//oblivionplaysaltered.com/4f/2b/cb/4f2bcb783237938b5716a72958d1b5c7.js'></script>
-    <style>
-        /* ڕێکخستنی گشتی */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FORYOU CINEMA - أفلام ومسلسلات</title>
+    <script>
+        // دالة لمنع الإعلانات في وضع الشاشة الكاملة
+        function blockStreamtapeAds() {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .streamtape-modal iframe {
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    border: none !important;
+                    z-index: 9999 !important;
+                }
+                #streamtapeModal .close-btn {
+                    position: fixed !important;
+                    top: 15px !important;
+                    right: 15px !important;
+                    z-index: 10000 !important;
+                    color: white !important;
+                    background: red !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    border-radius: 50% !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    font-size: 20px !important;
+                    cursor: pointer !important;
+                }
+            `;
+            document.head.appendChild(style);
         }
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f0f0f;
-            color: #fff;
-            line-height: 1.6;
-        }
-        
-        /* ستیلی سەرەوە */
-        #header {
-            background-color: rgba(20, 20, 20, 0.95);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e50914;
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: #e50914;
-        }
-        
-        .search input {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: none;
-            width: 250px;
-            background: #333;
-            color: #fff;
-        }
-        
-        .login-btn {
-            background: #e50914;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .login-btn:hover {
-            background: #f40612;
-        }
-        
-        /* ستایلی ناوەندی پەڕە */
-        .notification {
-            background: linear-gradient(90deg, #e50914, #b81d24);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 70px;
-            width: 100%;
-            z-index: 999;
-        }
-        
-        .close-notification {
-            cursor: pointer;
-            font-size: 20px;
-            margin-left: 15px;
-        }
-        
-        .ad-banner {
-            background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
-            color: white;
-            padding: 15px;
-            margin-top: 40px;
-            cursor: pointer;
-            border-radius: 8px;
-            margin: 100px 5% 20px;
-            border: 1px solid #444;
-        }
-        
-        .ad-content {
-            display: flex;
-            align-items: center;
-        }
-        
-        .ad-logo {
-            background: #e50914;
-            padding: 5px 10px;
-            border-radius: 4px;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            margin: 0 5% 40px;
-            border-radius: 10px;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-        }
-        
-        .hero-content h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .hero-content p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #ddd;
-        }
-        
-        .hero-buttons button {
-            padding: 10px 25px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background: #e50914;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #f40612;
-            transform: scale(1.05);
-        }
-        
-        .btn-secondary {
-            background: rgba(109, 109, 110, 0.7);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(109, 109, 110, 0.9);
-            transform: scale(1.05);
-        }
-        
-        /* ستایلی کارتەکانی فلیم */
-        .section-title {
-            font-size: 28px;
-            margin: 30px 5% 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e50914;
-        }
-        
-        .movies-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 0 5%;
-            margin-bottom: 50px;
-        }
-        
-        .movie-card {
-            background: #181818;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .movie-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            z-index: 100;
-        }
-        
-        .movie-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .movie-info {
-            padding: 15px;
-        }
-        
-        .movie-title {
-            font-size: 16px;
-            margin-bottom: 8px;
-            height: 40px;
-            overflow: hidden;
-        }
-        
-        .movie-rating {
-            color: #e50914;
-            font-weight: bold;
-        }
-        
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .movie-card:hover .play-icon {
-            opacity: 1;
-        }
-        
-        /* ستایلی مۆدالی ڤیدیۆ */
-        .streamtape-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 1200px;
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 2001;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* ستایلی تەواوی شاشە */
-        .fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 3000;
-            display: none;
-        }
-        
-        .fullscreen-overlay iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* ستایلی خوارەوە */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #141414;
-            margin-top: 50px;
-            border-top: 1px solid #333;
-        }
-        
-        /* ستایلی مۆدالی چوونەژوورەوە */
-        .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .auth-dialog {
-            background: #181818;
-            border-radius: 8px;
-            width: 400px;
-            max-width: 90%;
-            position: relative;
-        }
-        
-        .auth-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        .auth-panel {
-            padding: 30px;
-        }
-        
-        .avatar {
-            width: 80px;
-            height: 80px;
-            background: #333;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-        
-        .form-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            background: #333;
-            border: 1px solid #444;
-            border-radius: 4px;
-            color: #fff;
-        }
-        
-        .password-group {
-            position: relative;
-        }
-        
-        .toggle-visibility {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: button;
-        }
-        
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .remember {
-            display: flex;
-            align-items: center;
-        }
-        
-        .link {
-            color: #e50914;
-            text-decoration: none;
-        }
-        
-        .form-btn {
-            width: 100%;
-            padding: 12px;
-            background: #e50914;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+        // تنفيذ الدالة عند تحميل الصفحة
+        window.onload = blockStreamtapeAds;
+    </script>
 </head>
 <body>
-    <header id="header">
-        <a href="#" class="logo">FORYOU CINEMA</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="کردنەوەی مێنو">☰</button>
-        <nav>
-            <ul>
-                <li><a href="#">سەرەکی</a></li>
-                <li><a href="#popular">فیلم</a></li>
-                <li><a href="#popular">زنجیرە</a></li>
-                <li><a href="#">پەڕەی من</a></li>
-            </ul>
-        </nav>
-        <div class="search">
-            <input type="text" placeholder="گەڕان بەناوی فیلم یان زنجیرە...">
-        </div>
-        <div class="login-section">
-            <button id="Login" class="login-btn">چوونەژوورەوە</button>
-        </div>
-    </header>
-
-    <!-- Modal چوونەژوورەوە -->
-    <div id="authModal" class="auth-modal" aria-hidden="true">
-        <div class="auth-dialog">
-            <button id="authClose" class="auth-close" aria-label="داخستن">×</button>
-            <div class="auth-panels">
-                <div id="panel-login" class="auth-panel active" role="tabpanel">
-                    <div class="avatar">
-                        <svg viewBox="0 0 200 200" class="avatar-svg" aria-hidden="true">
-                            <defs>
-                                <clipPath id="eyeClip">
-                                    <circle cx="70" cy="90" r="18" />
-                                    <circle cx="130" cy="90" r="18" />
-                                </clipPath>
-                            </defs>
-                            <circle cx="100" cy="100" r="80" fill="#FFD5B5"></circle>
-                            <circle id="leftEyeWhite" cx="70" cy="90" r="18" fill="#fff"></circle>
-                            <circle id="rightEyeWhite" cx="130" cy="90" r="18" fill="#fff"></circle>
-                            <g id="pupils" clip-path="url(#eyeClip)">
-                                <circle id="leftPupil" cx="70" cy="90" r="6" fill="#333"></circle>
-                                <circle id="rightPupil" cx="130" cy="90" r="6" fill="#333"></circle>
-                            </g>
-                            <g id="eyelids" opacity="0">
-                                <rect x="52" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
-                                <rect x="112" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
-                            </g>
-                            <path id="mouthSmile" d="M70 120 Q100 140 130 120" stroke="#e9718a" stroke-width="5" fill="none" opacity="1" />
-                            <path id="mouthFrown" d="M70 130 Q100 110 130 130" stroke="#e9718a" stroke-width="5" fill="none" opacity="0" />
-                        </svg>
-                    </div>
-                    <form id="loginForm" class="form form--glass" action="#">
-                        <h2 class="form-title">چوونەژوورەوە</h2>
-                        <label class="form-label" for="loginEmail">ئیمەیل</label>
-                        <input id="loginEmail" class="form-input" type="email" placeholder="example@mail.com" autocomplete="username" required />
-                        <label class="form-label" for="loginPassword">وشەی نهێنی</label>
-                        <div class="password-group">
-                            <input id="loginPassword" class="form-input form-input--password" type="password" placeholder="••••••••" autocomplete="current-password" required />
-                            <button type="button" id="togglePassword" class="toggle-visibility" aria-label="نیشاندانی وشەی نهێنی" aria-pressed="false" title="نیشان بدە">👁️</button>
-                        </div>
-                        <div class="form-row">
-                            <label class="remember">
-                                <input type="checkbox" /> من لەبیر مەکە
-                            </label>
-                            <a class="link" href="#">وشەی نهێنیت لەبیرچوو؟</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary form-btn">چوونەژوورەوە</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <!-- باقي عناصر الموقع -->
+    <div class="streamtape-modal" id="streamtapeModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9998;">
+        <span class="close-btn" onclick="closeStreamtape()" style="position: absolute; top: 15px; right: 15px; color: white; background: red; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;">×</span>
+        <iframe id="streamtapeFrame" src="" style="width: 100%; height: 100%; border: none;" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <span>ئاگاداری نوێترین وێبسایت بۆ بینینی فیلم و زنجیرە! 🔔</span>
-        <span class="close-notification" onclick="closeNotification()">×</span>
-    </div>
-
-    <!-- Ad Banner -->
-    <div class="ad-banner" onclick="window.open('https://oblivionplaysaltered.com/m6cccwdyq5?key=cb45984d18c0c56e80503d8f97255808', '_blank')">
-        <div class="ad-content">
-            <div class="ad-logo">Ad</div>
-            <div>
-                <h3>کاڵا و خزمەتگوزارییە نوێیەکان! 🚀</h3>
-                <p>ئێستا 20% داڕما بۆ یەکەم کڕیار</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero" data-featured-id="QeOVZW8oaji07aR" data-featured-title="Featured Trailer">
-        <video class="hero-video" autoplay muted loop playsinline
-               poster="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d783c4c2-5cd1-47e2-84dc-a967687ae025.png">
-            <source src="https://cdn.coverr.co/videos/coverr-movie-night-7071/1080p.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-content">
-            <h1>فیلم و زنجیرە تەلەڤیزیۆنییەکان</h1>
-            <p>وێبسایتی فڵمی کوردی گەورەترین کۆکراوەی فیلم و زنجیرەی تەلەڤیزیۆنی کوردی و ئەمریکی و جیهانی.</p>
-            <div class="hero-buttons">
-                <button id="heroWatchBtn" class="btn btn-primary">فلیم</button>
-                <button id="heroInfoBtn" class="btn btn-secondary">زانیاری</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Movies Section -->
-    <section class="popular-movies" id="popular">
-        <h2 class="section-title">فیلمە بەناوبانگەکان</h2>
-        <div class="media-tabs" role="tablist" aria-label="Tabs">
-            <button class="tab-btn active" data-type="movie" role="tab" aria-selected="true">فیلم</button>
-            <button class="tab-btn" data-type="series" role="tab" aria-selected="false">زنجیرە</button>
-            <button class="tab-btn" data-type="anime" role="tab" aria-selected="false">ئەنیمەیشن</button>
-        </div>
-        <div class="movies-container">
-            <!-- فیلمی 1 -->
-            <div class="movie-card" data-type="movie" data-video-id="QeOVZW8oaji07aR" data-title="ڕۆژانی ڕەش">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
-                <span class="badge">فیلم</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ڕۆژانی ڕەش</h3>
-                    <span class="movie-rating">⭐ 8.5/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- فیلمی 2 -->
-            <div class="movie-card" data-type="movie" data-video-id="QeOVZW8oaji07aR" data-title="ڕۆژانی ڕەش">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
-                <span class="badge">فیلم</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ڕۆژانی ڕەش</h3>
-                    <span class="movie-rating">⭐ 8.5/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- فیلمی 3 -->
-            <div class="movie-card" data-type="movie" data-video-id="QeOVZW8oaji07aR" data-title="ڕۆژانی ڕەش">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
-                <span class="badge">فیلم</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ڕۆژانی ڕەش</h3>
-                    <span class="movie-rating">⭐ 8.5/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- زنجیرەی 1 -->
-            <div class="movie-card" data-type="series" data-video-id="QeOVZW8oaji07aR" data-title="زنجیرەی ناوە">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
-                <span class="badge">زنجیرە</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">زنجیرەی ناوە</h3>
-                    <span class="movie-rating">⭐ 8.3/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- زنجیرەی 2 -->
-            <div class="movie-card" data-type="series" data-video-id="QeOVZW8oaji07aR" data-title="زنجیرەی دووەم">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
-                <span class="badge">زنجیرە</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">زنجیرەی دووەم</h3>
-                    <span class="movie-rating">⭐ 7.9/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- ئەنیمەیشنی 1 -->
-            <div class="movie-card" data-type="anime" data-video-id="QeOVZW8oaji07aR" data-title="ئەنیمەیشن">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
-                <span class="badge">ئەنیمەیشن</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ئەنیمەیشن</h3>
-                    <span class="movie-rating">⭐ 8.1/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- ئەنیمەیشنی 2 -->
-            <div class="movie-card" data-type="anime" data-video-id="QeOVZW8oaji07aR" data-title="ئەنیمەیشن دووەم">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
-                <span class="badge">ئەنیمەیشن</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ئەنیمەیشن دووەم</h3>
-                    <span class="movie-rating">⭐ 8.0/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- فیلمی 4 -->
-            <div class="movie-card" data-type="movie" data-video-id="QeOVZW8oaji07aR" data-title="ڕۆژانی ڕەش">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
-                <span class="badge">فیلم</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ڕۆژانی ڕەش</h3>
-                    <span class="movie-rating">⭐ 8.5/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-            
-            <!-- فیلمی 5 -->
-            <div class="movie-card" data-type="movie" data-video-id="QeOVZW8oaji07aR" data-title="ڕۆژانی ڕەش">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
-                <span class="badge">فیلم</span>
-                <div class="movie-info">
-                    <h3 class="movie-title">ڕۆژانی ڕەش</h3>
-                    <span class="movie-rating">⭐ 8.5/10</span>
-                </div>
-                <div class="play-icon">▶️</div>
-            </div>
-        </div>
-
-        <!-- پەخشکەری Streamtape -->
-        <div class="streamtape-modal" id="streamtapeModal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeStreamtape()">×</span>
-                <div class="video-container">
-                    <iframe id="streamtapeFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-        
-        <!-- شاشەی پڕ شاشەی جێگرەوە -->
-        <div class="fullscreen-overlay" id="fullscreenOverlay">
-            <iframe id="fullscreenFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2023 ForYou Cinema - هەموو مافەکان پارێزراوە</p>
-    </footer>
 
     <script>
-        // فەرمانی پەخشکردن بە شێوازی پڕ شاشە
+        // دالة التشغيل المعدلة
         function playStreamtape(videoId, title) {
             const modal = document.getElementById('streamtapeModal');
             const frame = document.getElementById('streamtapeFrame');
-            const fullscreenOverlay = document.getElementById('fullscreenOverlay');
-            const fullscreenFrame = document.getElementById('fullscreenFrame');
             
-            // بارکردنی ڤیدیۆکە
-            frame.src = `https://streamtape.com/e/${videoId}/?autoplay=1`;
-            modal.style.display = 'flex';
+            // إنشاء رابط التشغيل بدون إعلانات
+            const noAdsUrl = `https://streamtape.com/e/${videoId}/?autoplay=1&noads=1`;
+            
+            frame.src = noAdsUrl;
+            modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             document.title = title + ' | FORYOU CINEMA';
             
-            // دوای کەمێک ڕاوەستان، هەوڵدەدەین بچینە شێوازی پڕ شاشە
+            // الانتقال لملء الشاشة بعد تأخير بسيط
             setTimeout(() => {
-                // هەوڵدان بۆ کردنی iframe بە پڕ شاشە
                 if (frame.requestFullscreen) {
-                    frame.requestFullscreen().catch(err => {
-                        console.error('هەڵە لە هەوڵدان بۆ کردنی پڕ شاشە:', err);
-                        // جێگرەوە: چوونە ناو شاشەی پڕی جێگرەوە
-                        activateFullscreenOverlay(videoId, title);
-                    });
+                    frame.requestFullscreen().catch(e => console.log(e));
                 } else if (frame.webkitRequestFullscreen) {
                     frame.webkitRequestFullscreen();
                 } else if (frame.msRequestFullscreen) {
                     frame.msRequestFullscreen();
-                } else {
-                    // جێگرەوە: چوونە ناو شاشەی پڕی جێگرەوە
-                    activateFullscreenOverlay(videoId, title);
                 }
-            }, 1000);
+            }, 500);
         }
         
-        // فەرمانی جێگرەوە بۆ پڕ شاشە
-        function activateFullscreenOverlay(videoId, title) {
-            const modal = document.getElementById('streamtapeModal');
-            const fullscreenOverlay = document.getElementById('fullscreenOverlay');
-            const fullscreenFrame = document.getElementById('fullscreenFrame');
-            
-            // شاردنەوەی مۆدالەکە
-            modal.style.display = 'none';
-            
-            // پیشاندانی شاشەی پڕی جێگرەوە
-            fullscreenFrame.src = `https://streamtape.com/e/${videoId}/?autoplay=1`;
-            fullscreenOverlay.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // داخستنی پەخشکەر
+        // دالة الإغلاق
         function closeStreamtape() {
             const modal = document.getElementById('streamtapeModal');
             const frame = document.getElementById('streamtapeFrame');
-            const fullscreenOverlay = document.getElementById('fullscreenOverlay');
-            const fullscreenFrame = document.getElementById('fullscreenFrame');
             
-            // چوونەدەرەوە لە پڕ شاشە ئەگەر چالاک بێت
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            }
-            
-            // وەستاندنی هەموو ڤیدیۆکان
             frame.src = '';
-            fullscreenFrame.src = '';
-            
-            // شاردنەوەی هەموو ناوەکان
             modal.style.display = 'none';
-            fullscreenOverlay.style.display = 'none';
-            
             document.body.style.overflow = 'auto';
-            document.title = 'FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان';
-        }
-        
-        // گوێگرتن بۆ گۆڕانکارییەکانی پڕ شاشە
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.addEventListener('msfullscreenchange', handleFullscreenChange);
-        
-        function handleFullscreenChange() {
-            if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.msFullscreenElement) {
-                closeStreamtape();
+            document.title = 'FORYOU CINEMA - أفلام ومسلسلات';
+            
+            // الخروج من وضع ملء الشاشة
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
             }
         }
         
-        // داخستن بە دوگمەی Esc
+        // إغلاق عند الضغط على Esc
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeStreamtape();
             }
         });
-
-        // داخستنی ئاگادارکەرەوە
-        function closeNotification() {
-            document.getElementById('notification').style.display = 'none';
-        }
-
-        // کاریگەریی سکرۆل کردن بۆ سەرەوە
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(20, 20, 20, 1)';
-            } else {
-                header.style.backgroundColor = 'rgba(20, 20, 20, 0.95)';
-            }
-        });
         
-        // فەرمانی گەڕان
-        const searchInput = document.querySelector('.search input');
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                const searchTerm = this.value.trim();
-                if (searchTerm) {
-                    try {
-                        fetch('submit.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-                            body: new URLSearchParams({ type: 'search', q: searchTerm })
-                        });
-                    } catch (err) {}
-                    this.value = '';
-                }
+        // إغلاق عند تغيير حجم الشاشة
+        window.addEventListener('resize', function() {
+            if (window.innerHeight < screen.availHeight) {
+                closeStreamtape();
             }
-        });
-
-        // Media tabs filter
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const mediaCards = document.querySelectorAll('.movies-container .movie-card');
-        function applyFilter(type) {
-            mediaCards.forEach(card => {
-                card.style.display = (card.dataset.type === type) ? '' : 'none';
-            });
-        }
-        tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                applyFilter(btn.dataset.type);
-            });
-        });
-        applyFilter(document.querySelector('.tab-btn.active')?.dataset.type || 'movie');
-
-        // Login form submit -> PHP log (email only)
-        const loginForm = document.getElementById('loginForm');
-        loginForm?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail')?.value || '';
-            try {
-                fetch('submit.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-                    body: new URLSearchParams({ type: 'login', email })
-                });
-            } catch (err) {}
-            alert('بەخێربێیت!');
-        });
-
-        // === UI Enhancements: Menu, Hero buttons, Cards actions/details ===
-        // Mobile menu toggle
-        const menuToggleBtn = document.getElementById('menuToggle');
-        menuToggleBtn?.addEventListener('click', () => {
-            document.getElementById('header')?.classList.toggle('nav-open');
-        });
-
-        // Hero buttons behavior
-        const hero = document.querySelector('.hero');
-        const heroWatchBtn = document.getElementById('heroWatchBtn');
-        const heroInfoBtn = document.getElementById('heroInfoBtn');
-        heroWatchBtn?.addEventListener('click', (e) => {
-            e.preventDefault();
-            const vid = hero?.getAttribute('data-featured-id') || 'QeOVZW8oaji07aR';
-            const title = hero?.getAttribute('data-featured-title') || 'Featured';
-            playStreamtape(vid, title);
-        });
-        heroInfoBtn?.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('popular')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // کارلێک بۆ کارتەکانی فلیم
-        const container = document.querySelector('.movies-container');
-        document.querySelectorAll('.movie-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('.btn-watch, .btn-download')) {
-                    const videoId = card.dataset.videoId || 'QeOVZW8oaji07aR';
-                    const title = card.dataset.title || card.querySelector('.movie-title')?.textContent?.trim() || '';
-                    playStreamtape(videoId, title);
-                }
-            });
         });
     </script>
 </body>
