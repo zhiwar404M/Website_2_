@@ -1,272 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineVerse - Premium Streaming Experience</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h1 class="logo-text">CineVerse</h1>
-                <div class="logo-3d-effect"></div>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Movies</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">TV Shows</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">My List</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Browse</a></li>
-            </ul>
-            <div class="nav-profile">
-                <div class="search-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="notifications">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </div>
-                <div class="profile-avatar">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face" alt="Profile">
-                </div>
-            </div>
+<!doctype html>
+<html lang="ku">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CineWave • فلیم و زنجیرە و ئەنیمەیشن</title>
+    <meta name="description" content="وێبسایتێکی تایبەتی بۆ فلیم، زنجیرە و ئەنیمەیشن بە دیزاینێکی پێشکەوتوو." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="bg-net"></div>
+    <header class="site-header">
+      <div class="header-top">
+        <div id="ad-top" class="ad-slot ad-top" aria-label="Adsterra Top Banner"></div>
+      </div>
+      <div class="header-main">
+        <a href="#/" class="brand">
+          <span class="brand-mark">◈</span>
+          <span class="brand-name">CineWave</span>
+        </a>
+        <nav class="nav">
+          <a href="#/" class="nav-link">سەرەکی</a>
+          <a href="#/movies" class="nav-link">فلیم</a>
+          <a href="#/series" class="nav-link">زنجیرە</a>
+          <a href="#/animation" class="nav-link">ئەنیمەیشن</a>
+          <a href="#/watchlist" class="nav-link">لیستی سەیرکردن</a>
+        </nav>
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="گەڕان..." aria-label="Search" />
+          <button id="searchBtn" class="btn btn-primary">گەڕان</button>
         </div>
-    </nav>
+      </div>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="floating-elements">
-                <div class="floating-poster poster-1"></div>
-                <div class="floating-poster poster-2"></div>
-                <div class="floating-poster poster-3"></div>
-                <div class="floating-poster poster-4"></div>
-            </div>
-        </div>
+    <aside class="sidebar">
+      <div id="ad-sidebar" class="ad-slot ad-sidebar" aria-label="Adsterra Sidebar"></div>
+    </aside>
+
+    <main id="app" class="app">
+      <section class="hero" id="hero">
+        <div class="hero-bg"></div>
         <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Experience Cinema in 3D</h1>
-                <p class="hero-description">Discover thousands of movies and TV shows with our immersive 3D streaming experience. Watch anywhere, anytime with stunning visual quality.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-play"></i>
-                        Play Now
-                    </button>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        More Info
-                    </button>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-3d-container">
-                    <div class="hero-movie-card">
-                        <div class="card-face card-front">
-                            <img src="https://images.unsplash.com/photo-1489599033881-b5078fe14678?w=300&h=450&fit=crop" alt="Featured Movie">
-                        </div>
-                        <div class="card-face card-back">
-                            <div class="card-info">
-                                <h3>Stellar Journey</h3>
-                                <p>An epic space adventure</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.2</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <h1 class="hero-title">سەیرکردنی فلیمی خۆشەویستەت بە شێوەیەکی نوێ</h1>
+          <p class="hero-sub">دیزاینی گڵاس/نیۆن، هەڵسەنگاندن و گەڕانی بێخەڵات، لەگەڵ جیاوازترین ئەنیوەشن و زنجیرەکان</p>
+          <div class="hero-cta">
+            <a href="#/trending" class="btn btn-glow">دەتەوێت دەستپێبکەیت؟</a>
+          </div>
         </div>
-        <div class="hero-particles"></div>
-    </section>
+      </section>
 
-    <!-- Featured Section -->
-    <section class="featured">
-        <div class="container">
-            <h2 class="section-title">Featured Content</h2>
-            <div class="featured-carousel">
-                <div class="carousel-track">
-                    <div class="featured-item">
-                        <div class="featured-card">
-                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&h=225&fit=crop" alt="Movie 1">
-                            <div class="card-overlay">
-                                <h3>Quantum Realm</h3>
-                                <p>Sci-Fi Adventure</p>
-                                <button class="play-btn"><i class="fas fa-play"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-item">
-                        <div class="featured-card">
-                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=225&fit=crop" alt="Movie 2">
-                            <div class="card-overlay">
-                                <h3>Ocean's Mystery</h3>
-                                <p>Thriller Drama</p>
-                                <button class="play-btn"><i class="fas fa-play"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-item">
-                        <div class="featured-card">
-                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=225&fit=crop" alt="Movie 3">
-                            <div class="card-overlay">
-                                <h3>Urban Legends</h3>
-                                <p>Action Comedy</p>
-                                <button class="play-btn"><i class="fas fa-play"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <section class="controls">
+        <div class="filters">
+          <select id="filterType">
+            <option value="all">هەموو</option>
+            <option value="movie">فلیم</option>
+            <option value="series">زنجیرە</option>
+            <option value="animation">ئەنیمەیشن</option>
+          </select>
+          <select id="filterYear">
+            <option value="all">ساڵ</option>
+          </select>
+          <select id="filterRating">
+            <option value="all">هەڵسەنگاندن</option>
+            <option value="9">9+</option>
+            <option value="8">8+</option>
+            <option value="7">7+</option>
+            <option value="6">6+</option>
+          </select>
+          <button id="clearFilters" class="btn btn-ghost">سڕینەوەی فلتەرەکان</button>
         </div>
-    </section>
-
-    <!-- Categories Grid -->
-    <section class="categories">
-        <div class="container">
-            <h2 class="section-title">Browse by Category</h2>
-            <div class="category-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Sci-Fi</h3>
-                    <p>Explore the future</p>
-                    <div class="category-bg"></div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>Romance</h3>
-                    <p>Love stories</p>
-                    <div class="category-bg"></div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-mask"></i>
-                    </div>
-                    <h3>Action</h3>
-                    <p>Adrenaline rush</p>
-                    <div class="category-bg"></div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-laugh"></i>
-                    </div>
-                    <h3>Comedy</h3>
-                    <p>Laugh out loud</p>
-                    <div class="category-bg"></div>
-                </div>
-            </div>
+        <div class="view-toggles">
+          <button id="toggleGrid" class="btn is-active" aria-pressed="true">گرید</button>
+          <button id="toggleList" class="btn" aria-pressed="false">لیست</button>
         </div>
-    </section>
+      </section>
 
-    <!-- Movie Grid -->
-    <section class="movies">
-        <div class="container">
-            <h2 class="section-title">Trending Now</h2>
-            <div class="movie-grid">
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>Neon Dreams</h3>
-                                <p>A cyberpunk thriller</p>
-                                <div class="rating">★★★★☆</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>Forest Whispers</h3>
-                                <p>Nature documentary</p>
-                                <div class="rating">★★★★★</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1489599033881-b5078fe14678?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>Space Odyssey</h3>
-                                <p>Epic space adventure</p>
-                                <div class="rating">★★★★☆</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>Ocean Depths</h3>
-                                <p>Underwater mystery</p>
-                                <div class="rating">★★★☆☆</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>City Lights</h3>
-                                <p>Urban drama</p>
-                                <div class="rating">★★★★☆</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=300&h=450&fit=crop" alt="Movie">
-                        </div>
-                        <div class="card-back">
-                            <div class="card-content">
-                                <h3>Time Portal</h3>
-                                <p>Time travel adventure</p>
-                                <div class="rating">★★★★★</div>
-                                <button class="watch-btn">Watch Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <section id="catalog" class="catalog">
+        <div id="catalogGrid" class="grid"></div>
+        <div id="loading" class="loading hide">
+          <div class="spinner"></div>
+          <span>بارکردن…</span>
         </div>
-    </section>
+      </section>
 
-    <script src="script.js"></script>
-</body>
+      <section id="detail" class="detail hide" aria-live="polite"></section>
+      <section id="watchlist" class="watchlist hide"></section>
+
+      <div id="ad-footer" class="ad-slot ad-footer" aria-label="Adsterra Footer"></div>
+    </main>
+
+    <div id="trailerModal" class="modal hide" role="dialog" aria-modal="true" aria-label="Trailer">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-content">
+        <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+        <div class="modal-body">
+          <iframe id="trailerFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script src="/ads/adsterra-config.js" defer></script>
+    <script src="/ads/adsterra.js" defer></script>
+    <script src="/scripts/app.js" defer></script>
+  </body>
 </html>

@@ -1,0 +1,12 @@
+[
+  { "id": "m-001", "title": "The Neon Frontier", "year": 2024, "type": "movie", "rating": 8.7, "genres": ["Action","Sci‑Fi"], "trailerId": "aqz-KE-bpKQ", "overview": "A rogue pilot crosses a glowing wormhole to save a future city." },
+  { "id": "m-002", "title": "Echoes of Glass", "year": 2023, "type": "movie", "rating": 8.2, "genres": ["Thriller","Drama"], "trailerId": "ysz5S6PUM-U", "overview": "Two detectives chase a phantom through a mirrored metropolis." },
+  { "id": "m-003", "title": "Pulse Runner", "year": 2022, "type": "movie", "rating": 7.9, "genres": ["Sci‑Fi","Adventure"], "trailerId": "aqz-KE-bpKQ", "overview": "A courier with a stolen AI outruns the megacity grid." },
+  { "id": "s-001", "title": "Shadows of Nine", "year": 2024, "type": "series", "rating": 8.4, "genres": ["Mystery","Crime"], "trailerId": "ysz5S6PUM-U", "overview": "Nine districts, nine secrets, one mastermind." },
+  { "id": "s-002", "title": "The Ark Ledger", "year": 2023, "type": "series", "rating": 8.1, "genres": ["Sci‑Fi","Drama"], "trailerId": "aqz-KE-bpKQ", "overview": "A crew catalogues alien relics aboard a drifting ark." },
+  { "id": "a-001", "title": "Luma & The Sky Garden", "year": 2022, "type": "animation", "rating": 8.9, "genres": ["Animation","Family"], "trailerId": "ysz5S6PUM-U", "overview": "A child revives a city by planting stars in the sky." },
+  { "id": "a-002", "title": "Clockwork Harbor", "year": 2021, "type": "animation", "rating": 8.3, "genres": ["Animation","Fantasy"], "trailerId": "aqz-KE-bpKQ", "overview": "Tiny inventors rebuild a seaside town with living clocks." },
+  { "id": "m-004", "title": "Violet Tempest", "year": 2020, "type": "movie", "rating": 7.4, "genres": ["Action","Fantasy"], "trailerId": "ysz5S6PUM-U", "overview": "A mage storms a neon citadel to reclaim a stolen relic." },
+  { "id": "s-003", "title": "Zero Day Lines", "year": 2021, "type": "series", "rating": 7.8, "genres": ["Tech","Thriller"], "trailerId": "aqz-KE-bpKQ", "overview": "Ethical hackers trace a ghost through broken networks." },
+  { "id": "m-005", "title": "Aurora Divide", "year": 2019, "type": "movie", "rating": 7.1, "genres": ["Adventure"], "trailerId": "ysz5S6PUM-U", "overview": "Explorers navigate an endless dusk split by auroras." }
+]
