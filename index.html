@@ -2,81 +2,271 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FORYOU CINEMA - أفلام ومسلسلات</title>
-    <script>
-        // دالة لمنع الإعلانات في وضع الشاشة الكاملة
-        function blockStreamtapeAds() {
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .streamtape-modal iframe {
-                    position: fixed !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    width: 100% !important;
-                    height: 100% !important;
-                    border: none !important;
-                    z-index: 9999 !important;
-                }
-                #streamtapeModal .close-btn {
-                    position: fixed !important;
-                    top: 15px !important;
-                    right: 15px !important;
-                    z-index: 10000 !important;
-                    color: white !important;
-                    background: red !important;
-                    width: 30px !important;
-                    height: 30px !important;
-                    border-radius: 50% !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    font-size: 20px !important;
-                    cursor: pointer !important;
-                }
-            `;
-            document.head.appendChild(style);
+    <link rel="stylesheet" href="style.css">
+    <title>FORYOU CINEMA - أفلام ومسلسلات تلفزيونية</title>
+    <script type='text/javascript' src='//oblivionplaysaltered.com/4f/2b/cb/4f2bcb783237938b5716a72958d1b5c7.js'></script>
+    <style>
+        /* ستايلات إضافية للواجهة العربية */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        // تنفيذ الدالة عند تحميل الصفحة
-        window.onload = blockStreamtapeAds;
-    </script>
+        .movie-card {
+            transition: all 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .streamtape-modal {
+            z-index: 2000;
+        }
+    </style>
 </head>
 <body>
-    <!-- باقي عناصر الموقع -->
-    <div class="streamtape-modal" id="streamtapeModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 9998;">
-        <span class="close-btn" onclick="closeStreamtape()" style="position: absolute; top: 15px; right: 15px; color: white; background: red; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;">×</span>
-        <iframe id="streamtapeFrame" src="" style="width: 100%; height: 100%; border: none;" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <header id="header">
+        <a href="#" class="logo">FORYOU CINEMA</a>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">أفلام</a></li>
+                <li><a href="#">مسلسلات</a></li>
+                <li><a href="#">صفحتي</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="ابحث باسم فيلم أو مسلسل...">
+        </div>
+        <div class="login-section">
+            <button id="Login" class="login-btn">تسجيل الدخول</button>
+        </div>
+    </header>
+
+    <!-- نافذة تسجيل الدخول -->
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+        <!-- تم الحفاظ على كود تسجيل الدخول مع ترجمة النصوص للعربية -->
+        <div class="auth-dialog">
+            <button id="authClose" class="auth-close" aria-label="إغلاق">×</button>
+            <div class="auth-panels">
+                <div id="panel-login" class="auth-panel active" role="tabpanel">
+                    <div class="avatar">
+                        <!-- رمز الصورة الرمزية -->
+                    </div>
+                    <form id="loginForm" class="form form--glass" action="#">
+                        <h2 class="form-title">تسجيل الدخول</h2>
+                        <label class="form-label" for="loginEmail">البريد الإلكتروني</label>
+                        <input id="loginEmail" class="form-input" type="email" placeholder="example@mail.com" required />
+
+                        <label class="form-label" for="loginPassword">كلمة المرور</label>
+                        <div class="password-group">
+                            <input id="loginPassword" class="form-input form-input--password" type="password" placeholder="••••••••" required />
+                            <button type="button" id="togglePassword" class="toggle-visibility" aria-label="إظهار كلمة المرور">👁️</button>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="remember">
+                                <input type="checkbox" /> تذكرني
+                            </label>
+                            <a class="link" href="#">نسيت كلمة المرور؟</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-btn">تسجيل الدخول</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- التنبيه -->
+    <div class="notification" id="notification">
+        <span>تنبيه: أحدث موقع لمشاهدة الأفلام والمسلسلات! 🔔</span>
+        <span class="close-notification" onclick="closeNotification()">×</span>
+    </div>
+
+    <!-- إعلان -->
+    <div class="ad-banner" onclick="window.open('https://oblivionplaysaltered.com/m6cccwdyq5?key=cb45984d18c0c56e80503d8f97255808', '_blank')">
+        <div class="ad-content">
+            <div class="ad-logo">إعلان</div>
+            <div>
+                <h3>منتجات وخدمات جديدة! 🚀</h3>
+                <p>خصم 20% الآن لأول عميل</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم البطل -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>أفلام ومسلسلات تلفزيونية</h1>
+            <p>موقع السينما الكردي هو أكبر مجموعة للأفلام والمسلسلات التلفزيونية الكردية والأمريكية والعالمية.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">مشاهدة</button>
+                <button class="btn btn-secondary">المزيد</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأفلام -->
+    <section class="popular-movies">
+        <h2 class="section-title">الأفلام الشعبية</h2>
+        <div class="movies-container">
+            <!-- فيلم 1 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'أيام الظلام')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="أيام الظلام">
+                <div class="movie-info">
+                    <h3 class="movie-title">أيام الظلام</h3>
+                    <span class="movie-rating">⭐ 8.5/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- فيلم 2 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'عائلتي')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c6292002-f7bd-4987-ba36-35346c78ebfd.png" alt="عائلتي">
+                <div class="movie-info">
+                    <h3 class="movie-title">عائلتي</h3>
+                    <span class="movie-rating">⭐ 9.0/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- فيلم 3 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'الأصدقاء')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/578f48f2-2257-4a1c-98ab-e6b0784e2eaa.png" alt="الأصدقاء">
+                <div class="movie-info">
+                    <h3 class="movie-title">الأصدقاء</h3>
+                    <span class="movie-rating">⭐ 7.8/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- فيلم 4 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'عالم السينما')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/615416ac-349a-44d3-88a2-8564314eb40b.png" alt="عالم السينما">
+                <div class="movie-info">
+                    <h3 class="movie-title">عالم السينما</h3>
+                    <span class="movie-rating">⭐ 8.2/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- فيلم 5 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'حب في باريس')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1626717b-b943-4a80-a09c-4395690f596e.png" alt="حب في باريس">
+                <div class="movie-info">
+                    <h3 class="movie-title">حب في باريس</h3>
+                    <span class="movie-rating">⭐ 8.9/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- فيلم 6 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'نهاية الزمن')">
+                <img src="https://via.placeholder.com/200x300?text=نهاية+الزمن" alt="نهاية الزمن">
+                <div class="movie-info">
+                    <h3 class="movie-title">نهاية الزمن</h3>
+                    <span class="movie-rating">⭐ 8.1/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المسلسلات -->
+    <section class="popular-tv">
+        <h2 class="section-title">المسلسلات التلفزيونية</h2>
+        <div class="movies-container">
+            <!-- مسلسل 1 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'قرية القلوب')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/500b2221-3df1-485d-912e-5333c985c229.png" alt="قرية القلوب">
+                <div class="movie-info">
+                    <h3 class="movie-title">قرية القلوب</h3>
+                    <span class="movie-rating">⭐ 8.7/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- مسلسل 2 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'البيشمركة')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f6b1347f-01b2-49a9-899f-2c19607db053.png" alt="البيشمركة">
+                <div class="movie-info">
+                    <h3 class="movie-title">البيشمركة</h3>
+                    <span class="movie-rating">⭐ 9.2/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- مسلسل 3 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'الشرطة')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/060ebfd9-f39a-4401-8e06-63e28fc30bdd.png" alt="الشرطة">
+                <div class="movie-info">
+                    <h3 class="movie-title">الشرطة</h3>
+                    <span class="movie-rating">⭐ 8.5/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- مسلسل 4 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'القصر')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cb7d5a46-1779-4a29-a944-4ec4c71a057a.png" alt="القصر">
+                <div class="movie-info">
+                    <h3 class="movie-title">القصر</h3>
+                    <span class="movie-rating">⭐ 8.0/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- مسلسل 5 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'الخبر السار')">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/877ce96d-40e7-4966-be49-19ee1f467183.png" alt="الخبر السار">
+                <div class="movie-info">
+                    <h3 class="movie-title">الخبر السار</h3>
+                    <span class="movie-rating">⭐ 7.9/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+
+            <!-- مسلسل 6 -->
+            <div class="movie-card" onclick="playStreamtape('QeOVZW8oaji07aR', 'الأطباء')">
+                <img src="https://via.placeholder.com/200x300?text=الأطباء" alt="الأطباء">
+                <div class="movie-info">
+                    <h3 class="movie-title">الأطباء</h3>
+                    <span class="movie-rating">⭐ 8.4/10</span>
+                </div>
+                <div class="play-icon">▶️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مشغل Streamtape -->
+    <div class="streamtape-modal" id="streamtapeModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeStreamtape()">×</span>
+            <div class="video-container">
+                <iframe id="streamtapeFrame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p>© 2023 سينما فور يو - جميع الحقوق محفوظة</p>
+    </footer>
+
     <script>
-        // دالة التشغيل المعدلة
+        // وظائف مشغل Streamtape
         function playStreamtape(videoId, title) {
             const modal = document.getElementById('streamtapeModal');
             const frame = document.getElementById('streamtapeFrame');
             
-            // إنشاء رابط التشغيل بدون إعلانات
-            const noAdsUrl = `https://streamtape.com/e/${videoId}/?autoplay=1&noads=1`;
-            
-            frame.src = noAdsUrl;
-            modal.style.display = 'block';
+            frame.src = `https://streamtape.com/e/${videoId}/?autoplay=1`;
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             document.title = title + ' | FORYOU CINEMA';
-            
-            // الانتقال لملء الشاشة بعد تأخير بسيط
-            setTimeout(() => {
-                if (frame.requestFullscreen) {
-                    frame.requestFullscreen().catch(e => console.log(e));
-                } else if (frame.webkitRequestFullscreen) {
-                    frame.webkitRequestFullscreen();
-                } else if (frame.msRequestFullscreen) {
-                    frame.msRequestFullscreen();
-                }
-            }, 500);
         }
         
-        // دالة الإغلاق
         function closeStreamtape() {
             const modal = document.getElementById('streamtapeModal');
             const frame = document.getElementById('streamtapeFrame');
@@ -84,29 +274,40 @@
             frame.src = '';
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            document.title = 'FORYOU CINEMA - أفلام ومسلسلات';
-            
-            // الخروج من وضع ملء الشاشة
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
+            document.title = 'FORYOU CINEMA - أفلام ومسلسلات تلفزيونية';
         }
         
-        // إغلاق عند الضغط على Esc
+        // إغلاق بمفتاح Esc
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeStreamtape();
             }
         });
+
+        // إغلاق التنبيه
+        function closeNotification() {
+            document.getElementById('notification').style.display = 'none';
+        }
+
+        // تأثير التمرير للهيدر
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(20, 20, 20, 1)';
+            } else {
+                header.style.backgroundColor = 'rgba(20, 20, 20, 0.95)';
+            }
+        });
         
-        // إغلاق عند تغيير حجم الشاشة
-        window.addEventListener('resize', function() {
-            if (window.innerHeight < screen.availHeight) {
-                closeStreamtape();
+        // وظيفة البحث
+        const searchInput = document.querySelector('.search input');
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value.trim();
+                if (searchTerm) {
+                    alert(`جار البحث عن: ${searchTerm}`);
+                    this.value = '';
+                }
             }
         });
     </script>
