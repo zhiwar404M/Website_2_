@@ -1,33 +1,1116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    <div class="wrapper">
-        <form action="#">
-            <h1>Login</h1>
-            <div class="input-box">
-                <input type="text" placeholder="Username" required>
-                <i class='bx bxs-user'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Password" required>
-                <i class='bx bxs-lock-alt'></i>
-            </div>
-            <div class="remember-forgot">
-                <label><input type="checkbox">Remember me</label>
-                <a href="#">Forgot password?</a>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <div class="register-link">
-                <p>Don't have an account? <a href="#">Register</a></p>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
+diff --git a/index.html b/index.html
+--- a/index.html
++++ b/index.html
+@@ -1,506 +1,603 @@
+-<!DOCTYPE html>
+-<html lang="ku" dir="rtl">
+-<head>
+-    <meta charset="UTF-8">
+-<link rel="stylesheet" href="style.css">
+-    <link rel="stylesheet" href="style.css">
+-    <title>FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان</title>
+-<script type='text/javascript' src='//oblivionplaysaltered.com/4f/2b/cb/4f2bcb783237938b5716a72958d1b5c7.js'></script>
+-</head>
+-<body>
+-      <header id="header">
+-    <a href="#" class="logo">FORYOU CINEMA</a>
+-    <nav>
+-        <ul>
+-            <li><a href="#">سەرەکی</a></li> <!-- پەڕەی ماڵەوە -->
+-            <li><a href="#">فیلم</a></li> <!-- پەڕەی فیلمەکان -->
+-            <li><a href="#">زنجیرە</a></li> <!-- پەڕەی زنجیرە تەلەڤیزیۆنییەکان -->
+-            <li><a href="#">پەڕەی من</a></li> <!-- پەڕەی ئەکاونت (پێویست بە چوونەژوورەوەیە) -->
+-        </ul>
+-    </nav>
+-    <div class="search">
+-        <input type="text" placeholder="گەڕان بەناوی فیلم یان زنجیرە..."> <!-- شوێنی گەڕان -->
+-    </div>
+-    <div class="login-section">
+-        <button id="Login" class="login-btn">چوونەژوورەوە</button> <!-- دوگمەی چوونەژوورەوە -->
+-      </div>
+-</header>
+-
+-    <!-- Modal چوونەژوورەوە -->
+-    <div id="authModal" class="auth-modal" aria-hidden="true">
+-        <div class="auth-dialog">
+-            <button id="authClose" class="auth-close" aria-label="داخستن">×</button>
+-
+-            
+-
+-            <div class="auth-panels">
+-                <!-- Panel: Login with animated avatar -->
+-                <div id="panel-login" class="auth-panel active" role="tabpanel">
+-                    <div class="avatar">
+-                        <svg viewBox="0 0 200 200" class="avatar-svg" aria-hidden="true">
+-                            <defs>
+-                                <clipPath id="eyeClip">
+-                                    <circle cx="70" cy="90" r="18" />
+-                                    <circle cx="130" cy="90" r="18" />
+-                                </clipPath>
+-                            </defs>
+-                            <circle cx="100" cy="100" r="80" fill="#FFD5B5"></circle>
+-                            <circle id="leftEyeWhite" cx="70" cy="90" r="18" fill="#fff"></circle>
+-                            <circle id="rightEyeWhite" cx="130" cy="90" r="18" fill="#fff"></circle>
+-                            <g id="pupils" clip-path="url(#eyeClip)">
+-                                <circle id="leftPupil" cx="70" cy="90" r="6" fill="#333"></circle>
+-                                <circle id="rightPupil" cx="130" cy="90" r="6" fill="#333"></circle>
+-                            </g>
+-                            <g id="eyelids" opacity="0">
+-                                <rect x="52" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
+-                                <rect x="112" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
+-                            </g>
+-                            <path id="mouthSmile" d="M70 120 Q100 140 130 120" stroke="#e9718a" stroke-width="5" fill="none" opacity="1" />
+-                            <path id="mouthFrown" d="M70 130 Q100 110 130 130" stroke="#e9718a" stroke-width="5" fill="none" opacity="0" />
+-                        </svg>
+-                    </div>
+-
+-                    <form id="loginForm" class="form form--glass" action="#">
+-                        <h2 class="form-title">چوونەژوورەوە</h2>
+-                        <label class="form-label" for="loginEmail">ئیمەیل</label>
+-                        <input id="loginEmail" class="form-input" type="email" placeholder="example@mail.com" autocomplete="username" required />
+-
+-                        <label class="form-label" for="loginPassword">وشەی نهێنی</label>
+-                        <div class="password-group">
+-                            <input id="loginPassword" class="form-input form-input--password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+-                            <button type="button" id="togglePassword" class="toggle-visibility" aria-label="نیشاندانی وشەی نهێنی" aria-pressed="false" title="نیشان بدە">👁️</button>
+-                        </div>
+-
+-                        <div class="form-row">
+-                            <label class="remember">
+-                                <input type="checkbox" /> من لەبیر مەکە
+-                            </label>
+-                            <a class="link" href="#">وشەی نهێنیت لەبیرچوو؟</a>
+-                        </div>
+-
+-                        <button type="submit" class="btn btn-primary form-btn">چوونەژوورەوە</button>
+-                    </form>
+-                </div>
+-
+-                
+-            </div>
+-        </div>
+-    </div>
+-    <!-- کۆتایی بەشی چونەژوورەوە  -->
+-
+-    <script>
+-    (function() {
+-        const openBtn = document.getElementById('Login');
+-        const modal = document.getElementById('authModal');
+-        const dialog = modal?.querySelector('.auth-dialog');
+-        const closeBtn = document.getElementById('authClose');
+-        // Single-panel auth (login only)
+-
+-        function openModal() {
+-            modal.classList.add('open');
+-            modal.setAttribute('aria-hidden', 'false');
+-        }
+-
+-        function closeModal() {
+-            modal.classList.remove('open');
+-            modal.setAttribute('aria-hidden', 'true');
+-        }
+-
+-        openBtn?.addEventListener('click', openModal);
+-        closeBtn?.addEventListener('click', closeModal);
+-        modal?.addEventListener('click', (e) => {
+-            if (!dialog.contains(e.target)) closeModal();
+-        });
+-        document.addEventListener('keydown', (e) => {
+-            if (e.key === 'Escape') closeModal();
+-        });
+-
+-        // Eye tracking for email input in "Login" tab
+-        const emailInput = document.getElementById('loginEmail');
+-        const leftPupil = document.getElementById('leftPupil');
+-        const rightPupil = document.getElementById('rightPupil');
+-        const avatar = document.querySelector('.avatar');
+-        const passwordInput = document.getElementById('loginPassword');
+-        const togglePasswordBtn = document.getElementById('togglePassword');
+-
+-        // Hidden mirror to measure caret X
+-        const mirror = document.createElement('span');
+-        mirror.id = 'emailMirror';
+-        mirror.style.position = 'absolute';
+-        mirror.style.visibility = 'hidden';
+-        mirror.style.whiteSpace = 'pre';
+-        mirror.style.pointerEvents = 'none';
+-        document.body.appendChild(mirror);
+-
+-        function updateMirrorStyles() {
+-            const cs = getComputedStyle(emailInput);
+-            mirror.style.font = cs.font;
+-            mirror.style.letterSpacing = cs.letterSpacing;
+-            mirror.style.padding = cs.padding;
+-            mirror.style.border = cs.border;
+-        }
+-
+-        function clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
+-
+-        function updateEyes() {
+-            if (!emailInput) return;
+-            if (avatar?.classList.contains('eyes-closed')) return; // don't move when eyes are closed
+-            updateMirrorStyles();
+-            const caretPos = emailInput.selectionEnd || 0;
+-            const textBeforeCaret = emailInput.value.slice(0, caretPos);
+-            mirror.textContent = textBeforeCaret || '';
+-
+-            const inputRect = emailInput.getBoundingClientRect();
+-            mirror.style.left = inputRect.left + 'px';
+-            mirror.style.top = inputRect.top + 'px';
+-            const textWidth = mirror.offsetWidth;
+-
+-            const xWithin = clamp(textWidth + 12, 0, emailInput.clientWidth - 12);
+-            const ratio = xWithin / Math.max(1, emailInput.clientWidth);
+-            const centered = ratio * 2 - 1; // -1 .. 1
+-
+-            const dx = clamp(centered * 6, -6, 6);
+-            const dy = clamp(Math.abs(centered) * 1.5, 0, 2);
+-
+-            leftPupil.style.transform = `translate(${dx}px, ${dy}px)`;
+-            rightPupil.style.transform = `translate(${dx}px, ${dy}px)`;
+-        }
+-
+-        ['input', 'keyup', 'click', 'focus'].forEach(evt => {
+-            emailInput?.addEventListener(evt, updateEyes);
+-        });
+-        // Initialize when modal opens
+-        modal?.addEventListener('transitionend', updateEyes);
+-
+-        // Mood logic based on email typing/backspace
+-        let prevEmailLen = 0;
+-        let moodTimer;
+-        function setMood(mood) {
+-            avatar?.classList.remove('mood-happy', 'mood-impatient');
+-            if (mood) avatar?.classList.add(`mood-${mood}`);
+-            clearTimeout(moodTimer);
+-            if (mood) {
+-                moodTimer = setTimeout(() => {
+-                    avatar?.classList.remove('mood-happy', 'mood-impatient');
+-                }, 800);
+-            }
+-        }
+-        emailInput?.addEventListener('input', () => {
+-            const len = emailInput.value.length;
+-            if (len > prevEmailLen) setMood('happy');
+-            if (len < prevEmailLen) setMood('impatient');
+-            prevEmailLen = len;
+-        });
+-
+-        // Password visibility + eyes close/open
+-        function closeEyes() { avatar?.classList.add('eyes-closed'); }
+-        function openEyes() { avatar?.classList.remove('eyes-closed'); }
+-
+-        passwordInput?.addEventListener('focus', () => {
+-            if (passwordInput.type === 'password') closeEyes();
+-        });
+-        passwordInput?.addEventListener('blur', openEyes);
+-
+-        togglePasswordBtn?.addEventListener('click', () => {
+-            const showing = passwordInput.type === 'text';
+-            if (showing) {
+-                passwordInput.type = 'password';
+-                togglePasswordBtn.setAttribute('aria-pressed', 'false');
+-                togglePasswordBtn.title = 'نیشان بدە';
+-                togglePasswordBtn.textContent = '👁️';
+-                if (document.activeElement === passwordInput) closeEyes();
+-            } else {
+-                passwordInput.type = 'text';
+-                togglePasswordBtn.setAttribute('aria-pressed', 'true');
+-                togglePasswordBtn.title = 'شاردنەوە';
+-                togglePasswordBtn.textContent = '🙈';
+-                openEyes();
+-            }
+-        });
+-    })();
+-    </script>
+-    <!-- Notification -->
+-    <div class="notification" id="notification">
+-        <span>ئاگاداری نوێترین وێبسایت بۆ بینینی فیلم و زنجیرە! 🔔</span>
+-        <span class="close-notification" onclick="closeNotification()">×</span>
+-    </div>
+-
+-    <!-- Ad Banner -->
+-    <div class="ad-banner" onclick="window.open('https://oblivionplaysaltered.com/m6cccwdyq5?key=cb45984d18c0c56e80503d8f97255808', '_blank')">
+-        <div class="ad-content">
+-            <div class="ad-logo">Ad</div>
+-            <div>
+-                <h3>کاڵا و خزمەتگوزارییە نوێیەکان! 🚀</h3>
+-                <p>ئێستا 20% داڕما بۆ یەکەم کڕیار</p>
+-            </div>
+-        </div>
+-    </div>
+-
+-    <!-- Hero Section -->
+-    <section class="hero">
+-        <div class="hero-motion" aria-hidden="true"></div>
+-        <div class="hero-content">
+-            <h1>فیلم و زنجیرە تەلەڤیزیۆنییەکان</h1>
+-            <p>وێبسایتی فڵمی کوردی گەورەترین کۆکراوەی فیلم و زنجیرەی تەلەڤیزیۆنی کوردی و ئەمریکی و جیهانی.</p>
+-            <div class="hero-buttons">
+-                <button class="btn btn-primary">بینین</button>
+-                <button class="btn btn-secondary">زانیاری زیاتر</button>
+-            </div>
+-        </div>
+-    </section>
+-    <!--test lab-->
+-    
+-  <!--end test-->
+-    <!-- Movies Section -->
+-    <section class="popular-movies">
+-        <h2 class="section-title">فیلمە بەناوبانگەکان</h2>
+-        <div class="media-tabs" role="tablist" aria-label="Tabs">
+-            <button class="tab-btn active" data-type="movie" role="tab" aria-selected="true">فیلم</button>
+-            <button class="tab-btn" data-type="series" role="tab" aria-selected="false">زنجیرە</button>
+-            <button class="tab-btn" data-type="anime" role="tab" aria-selected="false">ئەنیمەیشن</button>
+-        </div>
+-        <div class="movies-container">
+-<!-- فیلمی 1 -->
+-<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'How to Train Your Dragon 2025')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
+-    <span class="badge">فیلم</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
+-        <span class="movie-rating">⭐ 8.5/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Movie 2 -->
+-<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
+-    <span class="badge">فیلم</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
+-        <span class="movie-rating">⭐ 8.5/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Movie 3 -->
+-<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
+-    <span class="badge">فیلم</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
+-        <span class="movie-rating">⭐ 8.5/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Series 1 -->
+-<div class="movie-card" data-type="series" onclick="playStreamtape('QeOVZW8oaji07aR', 'زنجیرەی ناوە')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
+-    <span class="badge">زنجیرە</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">زنجیرەی ناوە</h3>
+-        <span class="movie-rating">⭐ 8.3/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Series 2 -->
+-<div class="movie-card" data-type="series" onclick="playStreamtape('QeOVZW8oaji07aR', 'زنجیرەی دووەم')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
+-    <span class="badge">زنجیرە</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">زنجیرەی دووەم</h3>
+-        <span class="movie-rating">⭐ 7.9/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Anime 1 -->
+-<div class="movie-card" data-type="anime" onclick="playStreamtape('QeOVZW8oaji07aR', 'ئەنیمەیشن')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
+-    <span class="badge">ئەنیمەیشن</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ئەنیمەیشن</h3>
+-        <span class="movie-rating">⭐ 8.1/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Anime 2 -->
+-<div class="movie-card" data-type="anime" onclick="playStreamtape('QeOVZW8oaji07aR', 'ئەنیمەیشن دووەم')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
+-    <span class="badge">ئەنیمەیشن</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ئەنیمەیشن دووەم</h3>
+-        <span class="movie-rating">⭐ 8.0/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Movie 4 -->
+-<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
+-    <span class="badge">فیلم</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
+-        <span class="movie-rating">⭐ 8.5/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-<!-- Movie 5 -->
+-<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
+-    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
+-    <span class="badge">فیلم</span>
+-    <div class="movie-info">
+-        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
+-        <span class="movie-rating">⭐ 8.5/10</span>
+-    </div>
+-    <div class="play-icon">▶️</div>
+-</div>
+-
+-        </div>
+-
+-        <!-- پەخشکەری Streamtape -->
+-        <div class="streamtape-modal" id="streamtapeModal">
+-            <div class="modal-content">
+-                <span class="close-btn" onclick="closeStreamtape()">×</span>
+-                <div class="video-container">
+-                    <iframe id="streamtapeFrame" src="" frameborder="0" allowfullscreen></iframe>
+-                </div>
+-            </div>
+-        </div>
+-
+-
+-<script>
+-    // فەرمانی پەخشکردن
+-    function playStreamtape(videoId, title) {
+-        const modal = document.getElementById('streamtapeModal');
+-        const frame = document.getElementById('streamtapeFrame');
+-        
+-        frame.src = `https://streamtape.com/e/${videoId}/?autoplay=1`;
+-        modal.style.display = 'flex';
+-        document.body.style.overflow = 'hidden';
+-        document.title = title + ' | FORYOU CINEMA';
+-    }
+-    
+-    // فەرمانی داخستن
+-    function closeStreamtape() {
+-        const modal = document.getElementById('streamtapeModal');
+-        const frame = document.getElementById('streamtapeFrame');
+-        
+-        frame.src = '';
+-        modal.style.display = 'none';
+-        document.body.style.overflow = 'auto';
+-        document.title = 'FORYOU CINEMA';
+-    }
+-    
+-    // داخستن بە Escape
+-    document.addEventListener('keydown', function(e) {
+-        if (e.key === 'Escape') {
+-            closeStreamtape();
+-        }
+-    });
+-</script>
+-
+-        
+-
+-    <!-- Footer -->
+-    <footer>
+-        <p>© 2023 ForYou Cinema - هەموو مافەکان پارێزراوە</p>
+-    </footer>
+-
+-    <script>
+-        // Video player functions
+-        function playMovie(videoUrl, title) {
+-            const player = document.getElementById('videoPlayer');
+-            const video = document.getElementById('moviePlayer');
+-            
+-            video.src = videoUrl;
+-            player.style.display = 'flex';
+-            video.play();
+-            document.title = title + ' | FORYOU CINEMA';
+-        }
+-
+-        function closeVideo() {
+-            const video = document.getElementById('moviePlayer');
+-            video.pause();
+-            document.getElementById('videoPlayer').style.display = 'none';
+-            document.title = 'FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان';
+-        }
+-
+-        // Notification close
+-        function closeNotification() {
+-            document.getElementById('notification').style.display = 'none';
+-        }
+-
+-        // Header scroll effect
+-        window.addEventListener('scroll', function() {
+-            const header = document.getElementById('header');
+-            if (window.scrollY > 100) {
+-                header.style.backgroundColor = 'rgba(20, 20, 20, 1)';
+-            } else {
+-                header.style.backgroundColor = 'rgba(20, 20, 20, 0.95)';
+-            }
+-        });
+-        
+-        
+-// زیادکردنی کارلێکی بەنج (Escape)
+-document.addEventListener('keydown', function(e) {
+-    if (e.key === 'Escape') {
+-        closeVideo();
+-    }
+-});
+-
+-        // Search functionality (logs to PHP)
+-        const searchInput = document.querySelector('.search input');
+-        searchInput.addEventListener('keyup', function(e) {
+-            if (e.key === 'Enter') {
+-                const searchTerm = this.value.trim();
+-                if (searchTerm) {
+-                    try {
+-                        fetch('submit.php', {
+-                            method: 'POST',
+-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+-                            body: new URLSearchParams({ type: 'search', q: searchTerm })
+-                        });
+-                    } catch (err) {}
+-                    this.value = '';
+-                }
+-            }
+-        });
+-
+-        // Media tabs filter
+-        const tabButtons = document.querySelectorAll('.tab-btn');
+-        const mediaCards = document.querySelectorAll('.movies-container .movie-card');
+-        function applyFilter(type) {
+-            mediaCards.forEach(card => {
+-                card.style.display = (card.dataset.type === type) ? '' : 'none';
+-            });
+-        }
+-        tabButtons.forEach(btn => {
+-            btn.addEventListener('click', () => {
+-                tabButtons.forEach(b => b.classList.remove('active'));
+-                btn.classList.add('active');
+-                applyFilter(btn.dataset.type);
+-            });
+-        });
+-        applyFilter(document.querySelector('.tab-btn.active')?.dataset.type || 'movie');
+-
+-        // Login form submit -> PHP log (email only)
+-        const loginForm = document.getElementById('loginForm');
+-        loginForm?.addEventListener('submit', function(e) {
+-            e.preventDefault();
+-            const email = document.getElementById('loginEmail')?.value || '';
+-            try {
+-                fetch('submit.php', {
+-                    method: 'POST',
+-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+-                    body: new URLSearchParams({ type: 'login', email })
+-                });
+-            } catch (err) {}
+-            alert('بەخێربێیت!');
+-        });
+-    </script>
+-</body>
+-</html>
++<!DOCTYPE html>
++<html lang="ku" dir="rtl">
++<head>
++    <meta charset="UTF-8">
++<link rel="stylesheet" href="style.css">
++    <link rel="stylesheet" href="style.css">
++    <title>FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان</title>
++<script type='text/javascript' src='//oblivionplaysaltered.com/4f/2b/cb/4f2bcb783237938b5716a72958d1b5c7.js'></script>
++</head>
++<body>
++      <header id="header">
++    <a href="#" class="logo">FORYOU CINEMA</a>
++    <button class="menu-toggle" id="menuToggle" aria-label="کردنەوەی مێنو">☰</button>
++    <nav>
++        <ul>
++            <li><a href="#">سەرەکی</a></li> <!-- پەڕەی ماڵەوە -->
++            <li><a href="#popular">فیلم</a></li> <!-- پەڕەی فیلمەکان -->
++            <li><a href="#popular">زنجیرە</a></li> <!-- پەڕەی زنجیرە تەلەڤیزیۆنییەکان -->
++            <li><a href="#">پەڕەی من</a></li> <!-- پەڕەی ئەکاونت (پێویست بە چوونەژوورەوەیە) -->
++        </ul>
++    </nav>
++    <div class="search">
++        <input type="text" placeholder="گەڕان بەناوی فیلم یان زنجیرە..."> <!-- شوێنی گەڕان -->
++    </div>
++    <div class="login-section">
++        <button id="Login" class="login-btn">چوونەژوورەوە</button> <!-- دوگمەی چوونەژوورەوە -->
++      </div>
++</header>
++
++    <!-- Modal چوونەژوورەوە -->
++    <div id="authModal" class="auth-modal" aria-hidden="true">
++        <div class="auth-dialog">
++            <button id="authClose" class="auth-close" aria-label="داخستن">×</button>
++
++            
++
++            <div class="auth-panels">
++                <!-- Panel: Login with animated avatar -->
++                <div id="panel-login" class="auth-panel active" role="tabpanel">
++                    <div class="avatar">
++                        <svg viewBox="0 0 200 200" class="avatar-svg" aria-hidden="true">
++                            <defs>
++                                <clipPath id="eyeClip">
++                                    <circle cx="70" cy="90" r="18" />
++                                    <circle cx="130" cy="90" r="18" />
++                                </clipPath>
++                            </defs>
++                            <circle cx="100" cy="100" r="80" fill="#FFD5B5"></circle>
++                            <circle id="leftEyeWhite" cx="70" cy="90" r="18" fill="#fff"></circle>
++                            <circle id="rightEyeWhite" cx="130" cy="90" r="18" fill="#fff"></circle>
++                            <g id="pupils" clip-path="url(#eyeClip)">
++                                <circle id="leftPupil" cx="70" cy="90" r="6" fill="#333"></circle>
++                                <circle id="rightPupil" cx="130" cy="90" r="6" fill="#333"></circle>
++                            </g>
++                            <g id="eyelids" opacity="0">
++                                <rect x="52" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
++                                <rect x="112" y="84" width="36" height="14" rx="7" fill="#FFD5B5"></rect>
++                            </g>
++                            <path id="mouthSmile" d="M70 120 Q100 140 130 120" stroke="#e9718a" stroke-width="5" fill="none" opacity="1" />
++                            <path id="mouthFrown" d="M70 130 Q100 110 130 130" stroke="#e9718a" stroke-width="5" fill="none" opacity="0" />
++                        </svg>
++                    </div>
++
++                    <form id="loginForm" class="form form--glass" action="#">
++                        <h2 class="form-title">چوونەژوورەوە</h2>
++                        <label class="form-label" for="loginEmail">ئیمەیل</label>
++                        <input id="loginEmail" class="form-input" type="email" placeholder="example@mail.com" autocomplete="username" required />
++
++                        <label class="form-label" for="loginPassword">وشەی نهێنی</label>
++                        <div class="password-group">
++                            <input id="loginPassword" class="form-input form-input--password" type="password" placeholder="••••••••" autocomplete="current-password" required />
++                            <button type="button" id="togglePassword" class="toggle-visibility" aria-label="نیشاندانی وشەی نهێنی" aria-pressed="false" title="نیشان بدە">👁️</button>
++                        </div>
++
++                        <div class="form-row">
++                            <label class="remember">
++                                <input type="checkbox" /> من لەبیر مەکە
++                            </label>
++                            <a class="link" href="#">وشەی نهێنیت لەبیرچوو؟</a>
++                        </div>
++
++                        <button type="submit" class="btn btn-primary form-btn">چوونەژوورەوە</button>
++                    </form>
++                </div>
++
++                
++            </div>
++        </div>
++    </div>
++    <!-- کۆتایی بەشی چونەژوورەوە  -->
++
++    <script>
++    (function() {
++        const openBtn = document.getElementById('Login');
++        const modal = document.getElementById('authModal');
++        const dialog = modal?.querySelector('.auth-dialog');
++        const closeBtn = document.getElementById('authClose');
++        // Single-panel auth (login only)
++
++        function openModal() {
++            modal.classList.add('open');
++            modal.setAttribute('aria-hidden', 'false');
++        }
++
++        function closeModal() {
++            modal.classList.remove('open');
++            modal.setAttribute('aria-hidden', 'true');
++        }
++
++        openBtn?.addEventListener('click', openModal);
++        closeBtn?.addEventListener('click', closeModal);
++        modal?.addEventListener('click', (e) => {
++            if (!dialog.contains(e.target)) closeModal();
++        });
++        document.addEventListener('keydown', (e) => {
++            if (e.key === 'Escape') closeModal();
++        });
++
++        // Eye tracking for email input in "Login" tab
++        const emailInput = document.getElementById('loginEmail');
++        const leftPupil = document.getElementById('leftPupil');
++        const rightPupil = document.getElementById('rightPupil');
++        const avatar = document.querySelector('.avatar');
++        const passwordInput = document.getElementById('loginPassword');
++        const togglePasswordBtn = document.getElementById('togglePassword');
++
++        // Hidden mirror to measure caret X
++        const mirror = document.createElement('span');
++        mirror.id = 'emailMirror';
++        mirror.style.position = 'absolute';
++        mirror.style.visibility = 'hidden';
++        mirror.style.whiteSpace = 'pre';
++        mirror.style.pointerEvents = 'none';
++        document.body.appendChild(mirror);
++
++        function updateMirrorStyles() {
++            const cs = getComputedStyle(emailInput);
++            mirror.style.font = cs.font;
++            mirror.style.letterSpacing = cs.letterSpacing;
++            mirror.style.padding = cs.padding;
++            mirror.style.border = cs.border;
++        }
++
++        function clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
++
++        function updateEyes() {
++            if (!emailInput) return;
++            if (avatar?.classList.contains('eyes-closed')) return; // don't move when eyes are closed
++            updateMirrorStyles();
++            const caretPos = emailInput.selectionEnd || 0;
++            const textBeforeCaret = emailInput.value.slice(0, caretPos);
++            mirror.textContent = textBeforeCaret || '';
++
++            const inputRect = emailInput.getBoundingClientRect();
++            mirror.style.left = inputRect.left + 'px';
++            mirror.style.top = inputRect.top + 'px';
++            const textWidth = mirror.offsetWidth;
++
++            const xWithin = clamp(textWidth + 12, 0, emailInput.clientWidth - 12);
++            const ratio = xWithin / Math.max(1, emailInput.clientWidth);
++            const centered = ratio * 2 - 1; // -1 .. 1
++
++            const dx = clamp(centered * 6, -6, 6);
++            const dy = clamp(Math.abs(centered) * 1.5, 0, 2);
++
++            leftPupil.style.transform = `translate(${dx}px, ${dy}px)`;
++            rightPupil.style.transform = `translate(${dx}px, ${dy}px)`;
++        }
++
++        ['input', 'keyup', 'click', 'focus'].forEach(evt => {
++            emailInput?.addEventListener(evt, updateEyes);
++        });
++        // Initialize when modal opens
++        modal?.addEventListener('transitionend', updateEyes);
++
++        // Mood logic based on email typing/backspace
++        let prevEmailLen = 0;
++        let moodTimer;
++        function setMood(mood) {
++            avatar?.classList.remove('mood-happy', 'mood-impatient');
++            if (mood) avatar?.classList.add(`mood-${mood}`);
++            clearTimeout(moodTimer);
++            if (mood) {
++                moodTimer = setTimeout(() => {
++                    avatar?.classList.remove('mood-happy', 'mood-impatient');
++                }, 800);
++            }
++        }
++        emailInput?.addEventListener('input', () => {
++            const len = emailInput.value.length;
++            if (len > prevEmailLen) setMood('happy');
++            if (len < prevEmailLen) setMood('impatient');
++            prevEmailLen = len;
++        });
++
++        // Password visibility + eyes close/open
++        function closeEyes() { avatar?.classList.add('eyes-closed'); }
++        function openEyes() { avatar?.classList.remove('eyes-closed'); }
++
++        passwordInput?.addEventListener('focus', () => {
++            if (passwordInput.type === 'password') closeEyes();
++        });
++        passwordInput?.addEventListener('blur', openEyes);
++
++        togglePasswordBtn?.addEventListener('click', () => {
++            const showing = passwordInput.type === 'text';
++            if (showing) {
++                passwordInput.type = 'password';
++                togglePasswordBtn.setAttribute('aria-pressed', 'false');
++                togglePasswordBtn.title = 'نیشان بدە';
++                togglePasswordBtn.textContent = '👁️';
++                if (document.activeElement === passwordInput) closeEyes();
++            } else {
++                passwordInput.type = 'text';
++                togglePasswordBtn.setAttribute('aria-pressed', 'true');
++                togglePasswordBtn.title = 'شاردنەوە';
++                togglePasswordBtn.textContent = '🙈';
++                openEyes();
++            }
++        });
++    })();
++    </script>
++    <!-- Notification -->
++    <div class="notification" id="notification">
++        <span>ئاگاداری نوێترین وێبسایت بۆ بینینی فیلم و زنجیرە! 🔔</span>
++        <span class="close-notification" onclick="closeNotification()">×</span>
++    </div>
++
++    <!-- Ad Banner -->
++    <div class="ad-banner" onclick="window.open('https://oblivionplaysaltered.com/m6cccwdyq5?key=cb45984d18c0c56e80503d8f97255808', '_blank')">
++        <div class="ad-content">
++            <div class="ad-logo">Ad</div>
++            <div>
++                <h3>کاڵا و خزمەتگوزارییە نوێیەکان! 🚀</h3>
++                <p>ئێستا 20% داڕما بۆ یەکەم کڕیار</p>
++            </div>
++        </div>
++    </div>
++
++    <!-- Hero Section -->
++    <section class="hero" data-featured-id="QeOVZW8oaji07aR" data-featured-title="Featured Trailer">
++        <video class="hero-video" autoplay muted loop playsinline
++               poster="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d783c4c2-5cd1-47e2-84dc-a967687ae025.png">
++            <source src="https://cdn.coverr.co/videos/coverr-movie-night-7071/1080p.mp4" type="video/mp4" />
++        </video>
++        <div class="hero-content">
++            <h1>فیلم و زنجیرە تەلەڤیزیۆنییەکان</h1>
++            <p>وێبسایتی فڵمی کوردی گەورەترین کۆکراوەی فیلم و زنجیرەی تەلەڤیزیۆنی کوردی و ئەمریکی و جیهانی.</p>
++            <div class="hero-buttons">
++                <button id="heroWatchBtn" class="btn btn-primary">فلیم</button>
++                <button id="heroInfoBtn" class="btn btn-secondary">زانیاری</button>
++            </div>
++        </div>
++    </section>
++    <!--test lab-->
++    
++  <!--end test-->
++    <!-- Movies Section -->
++    <section class="popular-movies" id="popular">
++        <h2 class="section-title">فیلمە بەناوبانگەکان</h2>
++        <div class="media-tabs" role="tablist" aria-label="Tabs">
++            <button class="tab-btn active" data-type="movie" role="tab" aria-selected="true">فیلم</button>
++            <button class="tab-btn" data-type="series" role="tab" aria-selected="false">زنجیرە</button>
++            <button class="tab-btn" data-type="anime" role="tab" aria-selected="false">ئەنیمەیشن</button>
++        </div>
++        <div class="movies-container">
++<!-- فیلمی 1 -->
++<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'How to Train Your Dragon 2025')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
++    <span class="badge">فیلم</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
++        <span class="movie-rating">⭐ 8.5/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Movie 2 -->
++<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
++    <span class="badge">فیلم</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
++        <span class="movie-rating">⭐ 8.5/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Movie 3 -->
++<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
++    <span class="badge">فیلم</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
++        <span class="movie-rating">⭐ 8.5/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Series 1 -->
++<div class="movie-card" data-type="series" onclick="playStreamtape('QeOVZW8oaji07aR', 'زنجیرەی ناوە')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
++    <span class="badge">زنجیرە</span>
++    <div class="movie-info">
++        <h3 class="movie-title">زنجیرەی ناوە</h3>
++        <span class="movie-rating">⭐ 8.3/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Series 2 -->
++<div class="movie-card" data-type="series" onclick="playStreamtape('QeOVZW8oaji07aR', 'زنجیرەی دووەم')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="زنجیرە">
++    <span class="badge">زنجیرە</span>
++    <div class="movie-info">
++        <h3 class="movie-title">زنجیرەی دووەم</h3>
++        <span class="movie-rating">⭐ 7.9/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Anime 1 -->
++<div class="movie-card" data-type="anime" onclick="playStreamtape('QeOVZW8oaji07aR', 'ئەنیمەیشن')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
++    <span class="badge">ئەنیمەیشن</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ئەنیمەیشن</h3>
++        <span class="movie-rating">⭐ 8.1/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Anime 2 -->
++<div class="movie-card" data-type="anime" onclick="playStreamtape('QeOVZW8oaji07aR', 'ئەنیمەیشن دووەم')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ئەنیمەیشن">
++    <span class="badge">ئەنیمەیشن</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ئەنیمەیشن دووەم</h3>
++        <span class="movie-rating">⭐ 8.0/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Movie 4 -->
++<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
++    <span class="badge">فیلم</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
++        <span class="movie-rating">⭐ 8.5/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++<!-- Movie 5 -->
++<div class="movie-card" data-type="movie" onclick="playStreamtape('QeOVZW8oaji07aR', 'ڕۆژانی ڕەش')">
++    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0105c775-2511-4821-85fa-08db4b3b73b7.png" alt="ڕۆژانی ڕەش">
++    <span class="badge">فیلم</span>
++    <div class="movie-info">
++        <h3 class="movie-title">ڕۆژانی ڕەش</h3>
++        <span class="movie-rating">⭐ 8.5/10</span>
++    </div>
++    <div class="play-icon">▶️</div>
++</div>
++
++        </div>
++
++        <!-- پەخشکەری Streamtape -->
++        <div class="streamtape-modal" id="streamtapeModal">
++            <div class="modal-content">
++                <span class="close-btn" onclick="closeStreamtape()">×</span>
++                <div class="video-container">
++                    <iframe id="streamtapeFrame" src="" frameborder="0" allowfullscreen></iframe>
++                </div>
++            </div>
++        </div>
++
++
++<script>
++    // فەرمانی پەخشکردن
++    function playStreamtape(videoId, title) {
++        const modal = document.getElementById('streamtapeModal');
++        const frame = document.getElementById('streamtapeFrame');
++        
++        frame.src = `https://streamtape.com/e/${videoId}/?autoplay=1`;
++        modal.style.display = 'flex';
++        document.body.style.overflow = 'hidden';
++        document.title = title + ' | FORYOU CINEMA';
++    }
++    
++    // فەرمانی داخستن
++    function closeStreamtape() {
++        const modal = document.getElementById('streamtapeModal');
++        const frame = document.getElementById('streamtapeFrame');
++        
++        frame.src = '';
++        modal.style.display = 'none';
++        document.body.style.overflow = 'auto';
++        document.title = 'FORYOU CINEMA';
++    }
++    
++    // داخستن بە Escape
++    document.addEventListener('keydown', function(e) {
++        if (e.key === 'Escape') {
++            closeStreamtape();
++        }
++    });
++</script>
++
++        
++
++    <!-- Footer -->
++    <footer>
++        <p>© 2023 ForYou Cinema - هەموو مافەکان پارێزراوە</p>
++    </footer>
++
++    <script>
++        // Video player functions
++        function playMovie(videoUrl, title) {
++            const player = document.getElementById('videoPlayer');
++            const video = document.getElementById('moviePlayer');
++            
++            video.src = videoUrl;
++            player.style.display = 'flex';
++            video.play();
++            document.title = title + ' | FORYOU CINEMA';
++        }
++
++        function closeVideo() {
++            const video = document.getElementById('moviePlayer');
++            video.pause();
++            document.getElementById('videoPlayer').style.display = 'none';
++            document.title = 'FORYOU CINEMA - فیلم و زنجیرە تەلەڤیزیۆنییەکان';
++        }
++
++        // Notification close
++        function closeNotification() {
++            document.getElementById('notification').style.display = 'none';
++        }
++
++        // Header scroll effect
++        window.addEventListener('scroll', function() {
++            const header = document.getElementById('header');
++            if (window.scrollY > 100) {
++                header.style.backgroundColor = 'rgba(20, 20, 20, 1)';
++            } else {
++                header.style.backgroundColor = 'rgba(20, 20, 20, 0.95)';
++            }
++        });
++        
++        
++// زیادکردنی کارلێکی بەنج (Escape)
++document.addEventListener('keydown', function(e) {
++    if (e.key === 'Escape') {
++        closeVideo();
++    }
++});
++
++        // Search functionality (logs to PHP)
++        const searchInput = document.querySelector('.search input');
++        searchInput.addEventListener('keyup', function(e) {
++            if (e.key === 'Enter') {
++                const searchTerm = this.value.trim();
++                if (searchTerm) {
++                    try {
++                        fetch('submit.php', {
++                            method: 'POST',
++                            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
++                            body: new URLSearchParams({ type: 'search', q: searchTerm })
++                        });
++                    } catch (err) {}
++                    this.value = '';
++                }
++            }
++        });
++
++        // Media tabs filter
++        const tabButtons = document.querySelectorAll('.tab-btn');
++        const mediaCards = document.querySelectorAll('.movies-container .movie-card');
++        function applyFilter(type) {
++            mediaCards.forEach(card => {
++                card.style.display = (card.dataset.type === type) ? '' : 'none';
++            });
++        }
++        tabButtons.forEach(btn => {
++            btn.addEventListener('click', () => {
++                tabButtons.forEach(b => b.classList.remove('active'));
++                btn.classList.add('active');
++                applyFilter(btn.dataset.type);
++            });
++        });
++        applyFilter(document.querySelector('.tab-btn.active')?.dataset.type || 'movie');
++
++        // Login form submit -> PHP log (email only)
++        const loginForm = document.getElementById('loginForm');
++        loginForm?.addEventListener('submit', function(e) {
++            e.preventDefault();
++            const email = document.getElementById('loginEmail')?.value || '';
++            try {
++                fetch('submit.php', {
++                    method: 'POST',
++                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
++                    body: new URLSearchParams({ type: 'login', email })
++                });
++            } catch (err) {}
++            alert('بەخێربێیت!');
++        });
++
++        // === UI Enhancements: Menu, Hero buttons, Cards actions/details ===
++        // Mobile menu toggle
++        const menuToggleBtn = document.getElementById('menuToggle');
++        menuToggleBtn?.addEventListener('click', () => {
++            document.getElementById('header')?.classList.toggle('nav-open');
++        });
++
++        // Hero buttons behavior
++        const hero = document.querySelector('.hero');
++        const heroWatchBtn = document.getElementById('heroWatchBtn');
++        const heroInfoBtn = document.getElementById('heroInfoBtn');
++        heroWatchBtn?.addEventListener('click', (e) => {
++            e.preventDefault();
++            const vid = hero?.getAttribute('data-featured-id') || 'QeOVZW8oaji07aR';
++            const title = hero?.getAttribute('data-featured-title') || 'Featured';
++            playStreamtape(vid, title);
++        });
++        heroInfoBtn?.addEventListener('click', (e) => {
++            e.preventDefault();
++            document.getElementById('popular')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
++        });
++
++        // Enhance each movie card with actions (Watch / Download) and a details panel
++        const container = document.querySelector('.movies-container');
++        function parseVideoFromOnclick(attr) {
++            if (!attr) return { id: '', title: '' };
++            const match = attr.match(/playStreamtape\('([^']+)'\s*,\s*'([^']+)'\)/);
++            return match ? { id: match[1], title: match[2] } : { id: '', title: '' };
++        }
++        function createActions() {
++            mediaCards.forEach(card => {
++                // Avoid duplicating
++                if (card.querySelector('.movie-actions')) return;
++                const { id, title } = parseVideoFromOnclick(card.getAttribute('onclick'));
++                card.dataset.videoId = id;
++                card.dataset.title = title || card.querySelector('.movie-title')?.textContent?.trim() || '';
++
++                const actions = document.createElement('div');
++                actions.className = 'movie-actions';
++                const watchBtn = document.createElement('button');
++                watchBtn.className = 'btn btn-primary btn-watch';
++                watchBtn.textContent = 'تماشا';
++                watchBtn.addEventListener('click', (ev) => {
++                    ev.stopPropagation();
++                    playStreamtape(card.dataset.videoId || 'QeOVZW8oaji07aR', card.dataset.title || '');
++                });
++                const downloadBtn = document.createElement('button');
++                downloadBtn.className = 'btn btn-secondary btn-download';
++                downloadBtn.textContent = 'داگرتن';
++                downloadBtn.addEventListener('click', (ev) => {
++                    ev.stopPropagation();
++                    toggleDetails(card);
++                });
++                actions.appendChild(watchBtn);
++                actions.appendChild(downloadBtn);
++                card.appendChild(actions);
++            });
++        }
++
++        function toggleDetails(card) {
++            // Close others
++            container.querySelectorAll('.movie-details').forEach(d => d.remove());
++            // Create details under this card
++            const details = document.createElement('div');
++            details.className = 'movie-details';
++            const title = card.dataset.title || card.querySelector('.movie-title')?.textContent?.trim() || 'تا ناونیشان';
++            const rating = card.querySelector('.movie-rating')?.textContent?.trim() || '⭐ 0/10';
++            const vid = card.dataset.videoId || 'QeOVZW8oaji07aR';
++            const downloadUrl = `https://streamtape.com/e/${vid}/?download=1`;
++            details.innerHTML = `
++                <div class="details-header">
++                    <h4 class="details-title">${title}</h4>
++                    <span class="details-rating">${rating}</span>
++                </div>
++                <p class="details-desc">زانیاری: ئەم فلیمە بەرزترین کوالێتی هەیە. دەتوانیت تماشای بکەیت یان داگرتن بکەیت.</p>
++                <div class="details-actions">
++                    <a class="btn btn-primary" href="#" data-action="watch">تماشا</a>
++                    <a class="btn btn-secondary" href="${downloadUrl}" target="_blank" rel="noopener">داگرتن</a>
++                </div>
++            `;
++            // Insert after the card
++            card.insertAdjacentElement('afterend', details);
++            // Wire watch in details
++            details.querySelector('[data-action="watch"]').addEventListener('click', (e) => {
++                e.preventDefault();
++                playStreamtape(vid, title);
++            });
++            // Auto scroll to make visible
++            details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
++        }
++
++        createActions();
++    </script>
++</body>
++</html>
+EOF
+)
