@@ -14,6 +14,8 @@
   </head>
   <body>
     <canvas id="bg"></canvas>
+    <!-- Spotlight overlay for cinematic focus -->
+    <div id="spotlight" aria-hidden="true"></div>
 
     <header class="nav">
       <div class="brand">
@@ -26,6 +28,10 @@
         <a href="#series">زنجیرە</a>
         <a href="#animation">ئەنیما</a>
       </nav>
+      <div class="nav-tools">
+        <button id="effectsToggle" class="btn ghost" title="کەمکردنەوەی ئەنیمەیشن و ئێفێکت">کەمکردنەوەی ئەنیمەیشن</button>
+        <div id="watchlistChip" class="watchlist-chip" title="لیستی سەیرکردن">لیست <span class="count">0</span></div>
+      </div>
       <div class="nav-cta">
         <button class="btn ghost">چوونەژوور</button>
         <button class="btn solid">تۆماربوون</button>
@@ -38,8 +44,8 @@
           <h1 class="headline" data-animate="letters">هەست بە سینەما بکە — ناوازە و جیاواز</h1>
           <p class="kicker" data-animate="words">ڕووکاری تاریک، ڕەنگی سوور و شەعشەی نیۆن، بە 3D و ئەنیمەیشنەکانی دڵڕفاندن — لە هیچ شوێنەکەی دیکە ناچیتە چاوت.</p>
           <div class="hero-cta">
-            <button class="btn xl solid">دەست پێ بکە</button>
-            <button class="btn xl ghost">بینینی تریلەر</button>
+            <button class="btn xl solid" id="ctaStart">دەست پێ بکە</button>
+            <button class="btn xl ghost" id="ctaTrailer">بینینی تریلەر</button>
           </div>
           <div class="hero-meta">
             <div class="meta-chip">4K HDR</div>
@@ -140,6 +146,15 @@
 
     <div class="creator-badge" title="Made by ZHIWAR">
       <span>ZHIWAR</span>
+    </div>
+
+    <!-- Trailer modal -->
+    <div id="trailerModal" class="modal" aria-hidden="true" role="dialog" aria-label="تریلەر">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" aria-label="داخستن">×</button>
+        <video id="trailerVideo" controls playsinline></video>
+      </div>
     </div>
 
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
